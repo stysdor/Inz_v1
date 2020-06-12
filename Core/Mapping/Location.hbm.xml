@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="Inz_v1.Core.Domain" assembly="Inz_v1.Core" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Location" table="Location">
+    <id name="Id" column="Id" type="Int32">
+    </id>
+    <property name="N_latitude" type="Double" column="N_latitude"  />
+    <property name="E_longitude" type="Double" column="E_longitude"  />
+  </class>
+</hibernate-mapping>
