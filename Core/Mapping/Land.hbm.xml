@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping namespace="Inz_v1.Core.Domain" assembly="Inz_v1.Core" xmlns="urn:nhibernate-mapping-2.2">
+<hibernate-mapping namespace="Core.Domain" assembly="Core" xmlns="urn:nhibernate-mapping-2.2">
   <class name="Land" table="Land">
     <id name="Id" column="Id" type="Int32">
+      <generator class="native" />
     </id>
-    <property name="Area" type="Currency" column="Area"  />
-    <property name="Price" type="Currency" column="Price"  />
-    <property name="IsElectricity" type="Boolean" column="IsElectricity"  />
-    <property name="IsGas" type="Boolean" column="IsGas"  />
-    <property name="IsWater" type="Boolean" column="IsWater"  />
-    <property name="IsSewers" type="Boolean" column="IsSewers"  />
-    <property name="Type" type="string" column="Type"  />
-    <property name="Road" type="string" column="Road"  />
-    <many-to-one name="Location" class="Inz_v1.Core.Domain.Location" column="Location" fetch="select" lazy="false" cascade="none" />
+    <property name="Area"  />
+    <property name="Price"   />
+    <property name="IsElectricity"  />
+    <property name="IsGas"  />
+    <property name="IsWater"   />
+    <property name="IsSewers"   />
+    <property name="Type"  />
+    <property name="Road"   />
+    <many-to-one name="Location" class="Core.Domain.Location" column="LocationId" fetch="select" lazy="false" cascade="save-update" />
   </class>
 </hibernate-mapping>

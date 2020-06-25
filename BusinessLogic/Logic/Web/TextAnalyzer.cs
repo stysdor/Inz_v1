@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OfferService.Model
+namespace BusinessLogic.Logic.Web
 {
     public class TextAnalyzer
     {

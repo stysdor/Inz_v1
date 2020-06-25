@@ -54,9 +54,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Mapping\Land.hbm.xml" />
-    <Content Include="Mapping\LandOffer.hbm.xml" />
-    <Content Include="Mapping\Location.hbm.xml" />
+    <EmbeddedResource Include="Mapping\Land.hbm.xml" />
+    <EmbeddedResource Include="Mapping\LandOffer.hbm.xml" />
+    <EmbeddedResource Include="Mapping\Location.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

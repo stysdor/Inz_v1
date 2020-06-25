@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Api.Interface;
 using BusinessLogic.Communication;
+using BusinessLogic.Logic.Web;
 using BusinessLogic.ModelDTO;
 using BusinessLogic.NHibernate;
 using Core.Domain;
@@ -49,7 +50,33 @@ namespace BusinessLogic.Api
             }
         }
 
-
+        public void AddLandOffers(List<LandOffer> list)
+        {
+            using (var session = NHibernateBase.Session)
+            {
+                foreach (var item in list)
+                using (var transaction = session.BeginTransaction())
+                {
+                    try
+                    {
+                        {
+                            item.OfferDateTime = DateTime.Now;
+                            session.SaveOrUpdate(item);
+                        }
+                    transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+        public void DownloadLandOffers()
+        {
+            var list = new GratkaWebSite().GetLandOffersFromWebsite();
+            AddLandOffers(list);
+        }
 
     }
 }

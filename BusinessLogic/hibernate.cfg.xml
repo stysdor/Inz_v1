@@ -11,10 +11,10 @@
       300
     </property>
     <property name="connection.connection_string">
-      Data Source=DESKTOP-EBKQ33A;Initial Catalog=Land_v1;Integrated Security=True;
+      Data Source=DESKTOP-EBKQ33A;Initial Catalog=Lands_v1;Integrated Security=True;
     </property>
     <property name="dialect">NHibernate.Dialect.MsSql2008Dialect</property>
     <property name="show_sql">false</property>
-    <mapping xmlns="urn:nhibernate-configuration-2.2" assembly="Inz_v1.Core" />
+    <mapping xmlns="urn:nhibernate-configuration-2.2" assembly="Core" />
   </session-factory>
 </hibernate-configuration>

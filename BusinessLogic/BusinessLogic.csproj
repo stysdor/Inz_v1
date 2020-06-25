@@ -68,8 +68,10 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Communication\ListLandOfferServiceResponse.cs" />
     <Compile Include="Communication\ServiceResponse.cs" />
-    <Compile Include="Logic\OfferDownloader.cs" />
     <Compile Include="Logic\Interface\IOfferDownloader.cs" />
+    <Compile Include="Logic\Web\GratkaWebSite.cs" />
+    <Compile Include="Logic\Web\TextAnalyzer.cs" />
+    <Compile Include="Logic\Web\WebSite.cs" />
     <Compile Include="ModelDTO\LandOfferDTO.cs" />
     <Compile Include="NHibernate\NHibernateBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,13 +84,11 @@
       <Project>{9b51260c-20da-46b5-b895-2b2301b6d4ea}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OfferService\OfferService.csproj">
-      <Project>{4733601c-2f2d-471a-a007-f1726c67546e}</Project>
-      <Name>OfferService</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="hibernate.cfg.xml" />
+    <EmbeddedResource Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

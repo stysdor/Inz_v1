@@ -8,15 +8,15 @@ namespace Core.Domain
 {
     public class Land
     {
-        public int Id { get; set; }
-        public decimal Area { get; set; }
-        public decimal Price { get; set; }
-        public Boolean IsElectricity { get; set; }
-        public Boolean IsGas { get; set; }
-        public Boolean IsWater { get; set; }
-        public Boolean IsSewers { get; set; }
-        public string Type { get; set; }
-        public string Road { get; set; }
-        public Location Location { get; set; }   
+        public virtual int Id { get; set; }
+        public virtual decimal Area { get; set; }
+        public virtual decimal Price { get; set; }
+        public virtual bool IsElectricity { get; set; }
+        public virtual bool IsGas { get; set; }
+        public virtual bool IsWater { get; set; }
+        public virtual bool IsSewers { get; set; }
+        public virtual string Type { get; set; }
+        public virtual string Road { get; set; }
+        public virtual Location Location { get; set; }   
     }
 }

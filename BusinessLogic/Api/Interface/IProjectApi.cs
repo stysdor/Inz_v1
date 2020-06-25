@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Communication;
+using Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace BusinessLogic.Api.Interface
 {
     public interface IProjectApi
     {
-        void TestNHibernate();
-        ListLandOfferServiceResponse GetLandOffers();
+         ListLandOfferServiceResponse GetLandOffers();
+
+        void AddLandOffers(List<LandOffer> list);
+        void DownloadLandOffers();
     }
 }

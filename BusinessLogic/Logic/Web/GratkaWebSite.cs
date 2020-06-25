@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using Core.Domain;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace OfferService.Model
+namespace BusinessLogic.Logic.Web
 {
     public class GratkaWebSite: WebSite
     {
@@ -140,6 +141,8 @@ namespace OfferService.Model
                 string xString = scriptContent.Substring(indexX + 16, 7);
                 xString = Regex.Replace(xString, @"[^\d.]", "");
                 yString = Regex.Replace(yString, @"[^\d.]", "");
+                xString = xString.Replace(".", ",");
+                yString = yString.Replace(".", ",");
                 x = Convert.ToDouble(xString);
                 y = Convert.ToDouble(yString);
                 location.E_longitude = x;
@@ -217,7 +220,7 @@ namespace OfferService.Model
             string roadString = "";
             if (doc.DocumentNode.SelectNodes(Road_xPath) != null)
             {
-                roadString = doc.DocumentNode.SelectSingleNode(Sewers_xPath).WriteContentTo();
+                roadString = doc.DocumentNode.SelectSingleNode(Road_xPath).WriteContentTo();
 
             }
             else

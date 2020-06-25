@@ -37,5 +37,12 @@ namespace Inz_v1.Controllers
 
             return View();
         }
+
+        public ActionResult DownloadLandOffers()
+        {
+            IProjectApi api = new ProjectApi();
+            api.DownloadLandOffers();
+            return View();
+        }
     }
 }
