@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using Core.Domain;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,18 +7,18 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace OfferService.Model
+namespace BusinessLogic.Logic.Web
 {
     public class GratkaWebSite: WebSite
     {
         //Url of the website
-        public override string Url => "https://gratka.pl/nieruchomosci/dzialki-grunty/rzeszow/sprzedaz";
+        public override string Url => "https://gratka.pl/nieruchomosci/dzialki-grunty/rzeszow";
         //xPaths to get informations from the website
-        public override string OfferCount_xPath => "//span[@class='content__offerCount']";
-        public override string Url_xPath => "//article[@class='teaserEstate ']";
+        public override string OfferCount_xPath => "//span[@class='listingHeader__offersCount ']";
+        public override string Url_xPath => "//article[@role='link']";
         public override string Area_xPath => "//li[span[contains(text(),'Powierzchnia działki w m2')]]/b";
         public override string Price_xPath => "//span[@class='priceInfo__value']";
-        public override string Location_xPath => "//div[@id='item-map']/following-sibling::script[1]";
+        public override string Location_xPath => "//div[@class='localizationModal']/following-sibling::script[1]";
         public override string Electricity_xPath => "//li[span[contains(text(),'Prąd')]]/b";
         public override string Sewers_xPath => "//li[span[contains(text(),'Kanalizacja')]]/b";
         public override string Water_xPath => "//li[span[contains(text(),'Woda')]]/b";
@@ -29,7 +30,7 @@ namespace OfferService.Model
         {
             int offerCount = 0;
             HtmlWeb web = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlDocument doc = new HtmlDocument();
             doc = web.Load(Url);
 
             if (doc.DocumentNode.SelectNodes(OfferCount_xPath) != null)
@@ -47,7 +48,7 @@ namespace OfferService.Model
         {
             // declaring & loading dom
             HtmlWeb web = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlDocument doc = new HtmlDocument();
             doc = web.Load(Url);
 
             //create new list of url string
@@ -140,6 +141,8 @@ namespace OfferService.Model
                 string xString = scriptContent.Substring(indexX + 16, 7);
                 xString = Regex.Replace(xString, @"[^\d.]", "");
                 yString = Regex.Replace(yString, @"[^\d.]", "");
+                xString = xString.Replace(".", ",");
+                yString = yString.Replace(".", ",");
                 x = Convert.ToDouble(xString);
                 y = Convert.ToDouble(yString);
                 location.E_longitude = x;
@@ -217,7 +220,7 @@ namespace OfferService.Model
             string roadString = "";
             if (doc.DocumentNode.SelectNodes(Road_xPath) != null)
             {
-                roadString = doc.DocumentNode.SelectSingleNode(Sewers_xPath).WriteContentTo();
+                roadString = doc.DocumentNode.SelectSingleNode(Road_xPath).WriteContentTo();
 
             }
             else

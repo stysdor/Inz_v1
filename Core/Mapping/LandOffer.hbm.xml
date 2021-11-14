@@ -1,17 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<hibernate-mapping namespace="Inz_v1.Core.Domain" assembly="Inz_v1.Core" xmlns="urn:nhibernate-mapping-2.2">
-  <class name="Land" table="Land">
+<hibernate-mapping namespace="Core.Domain" assembly="Core" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="LandOffer" table="LandOffer">
     <id name="Id" column="Id" type="Int32">
+      <generator class="native" />
     </id>
-    <property name="Area" type="Currency" column="Area"  />
-    <property name="Price" type="Currency" column="Price"  />
-    <property name="Electricity" type="String" column="Electricity"  />
-    <property name="Gas" type="String" column="Gas"  />
-    <property name="Water" type="String" column="Water"  />
-    <property name="Sewers" type="String" column="Sewers"  />
-    <property name="Type" type="String" column="Type"  />
-    <property name="Road" type="String" column="Road"  />
-    <property name="Description" type="String" column="Description"  />
-    <many-to-one name="Location" class="Inz_v1.Core.Domain.Location" column="Location" fetch="select" lazy="false" cascade="none" />
+    <property name="Area"  />
+    <property name="Price"  />
+    <property name="Electricity"   />
+    <property name="Gas"   />
+    <property name="Water"   />
+    <property name="Sewers"   />
+    <property name="Type" />
+    <property name="Road"   />
+    <property name="Description"   />
+    <many-to-one name="Location" class="Core.Domain.Location" column="LocationId" fetch="select" lazy="false" cascade="save-update" />
+    <property name="OfferDateTime" />
+    <property name="IsElectricity" type="Boolean" />
+    <property name="IsGas" column="isGas" type="Boolean"/>
+    <property name="IsWater" column="isWater" type="Boolean"/>
+    <property name="IsSewers" column="isSewers" type="Boolean"/>
   </class>
 </hibernate-mapping>

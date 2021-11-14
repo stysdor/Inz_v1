@@ -8,8 +8,8 @@ namespace Core.Domain
 {
     public class Location
     {
-        public int Id { get; set; }
-        public double N_latitude { get; set; }
-        public double E_longitude { get; set; }
+        public virtual int Id { get; set; }
+        public virtual double N_latitude { get; set; }
+        public virtual double E_longitude { get; set; }
     }
 }

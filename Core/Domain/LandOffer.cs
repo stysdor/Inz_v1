@@ -8,16 +8,21 @@ namespace Core.Domain
 {
     public class LandOffer
     {
-        public int Id { get; set; }
-        public decimal Area { get; set; }
-        public decimal Price { get; set; }
-        public string Electricity { get; set; }
-        public string Gas { get; set; }
-        public string Water { get; set; }
-        public string Sewers { get; set; }
-        public string Type { get; set; }
-        public string Road { get; set; }
-        public Location Location { get; set; }
-        public string Description { get; set; }
+        public virtual int Id { get; set; }
+        public virtual decimal Area { get; set; }
+        public virtual decimal Price { get; set; }
+        public virtual string Electricity { get; set; }
+        public virtual string Gas { get; set; }
+        public virtual string Water { get; set; }
+        public virtual string Sewers { get; set; }
+        public virtual string Type { get; set; }
+        public virtual string Road { get; set; }
+        public virtual Location Location { get; set; }
+        public virtual string Description { get; set; }
+        public virtual DateTime OfferDateTime { get; set; }
+        public virtual bool IsElectricity { get; set; }
+        public virtual bool IsGas { get; set; }
+        public virtual bool IsWater { get; set; }
+        public virtual bool IsSewers { get; set; }
     }
 }

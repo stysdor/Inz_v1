@@ -1,11 +1,12 @@
-﻿using HtmlAgilityPack;
+﻿using Core.Domain;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OfferService.Model
+namespace BusinessLogic.Logic.Web
 {
     public abstract class WebSite
     {
@@ -99,9 +100,9 @@ namespace OfferService.Model
         public abstract string GetDescriptionFromUrl(HtmlAgilityPack.HtmlDocument doc);
         public abstract Location GetLocationFromUrl(HtmlAgilityPack.HtmlDocument doc);
 
-        public void GetLandOffersFromWebsite()
+        public List<LandOffer> GetLandOffersFromWebsite()
         {
-            this.GetLands(this.TakeOfferLinks());
+             return this.GetLands(this.TakeOfferLinks());
         }
 
         public List<LandOffer> GetLands(List<string> urlList)

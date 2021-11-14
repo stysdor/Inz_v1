@@ -1,6 +1,4 @@
-﻿using BusinessLogic.Api;
-using BusinessLogic.Api.Interface;
-using Inz_v1.Models;
+﻿using Inz_v1.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,19 +15,19 @@ namespace Inz_v1.Controllers
             return View();
         }
 
-        public ActionResult ViewLands()
-        {
-            ViewBag.Message = "Przeglądaj działki";
-            List<LandOfferModel> list = new List<LandOfferModel>();
-            IProjectApi api = new ProjectApi();
-            var dataResponse = api.GetLandOffers();
-            if (!dataResponse.Success)
-            {
-                Trace.TraceWarning(dataResponse.Errors);
-            }
+        //public ActionResult ViewLands()
+        //{
+        //    ViewBag.Message = "Przeglądaj działki";
+        //    List<LandOfferModel> list = new List<LandOfferModel>();
+        //    IProjectApi api = new ProjectApi();
+        //    var dataResponse = api.GetLandOffers();
+        //    if (!dataResponse.Success)
+        //    {
+        //        Trace.TraceWarning(dataResponse.Errors);
+        //    }
 
-            return View();
-        }
+        //    return View(list);
+        //}
 
         public ActionResult PriceYourLand()
         {
@@ -37,5 +35,12 @@ namespace Inz_v1.Controllers
 
             return View();
         }
+
+        //public ActionResult DownloadLandOffers()
+        //{
+        //    IProjectApi api = new ProjectApi();
+        //    api.DownloadLandOffers();
+        //    return View();
+        //}
     }
 }

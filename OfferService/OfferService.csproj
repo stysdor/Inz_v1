@@ -44,11 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\GratkaWebSite.cs" />
-    <Compile Include="Model\LandOffer.cs" />
-    <Compile Include="Model\Location.cs" />
-    <Compile Include="Model\TextAnalyzer.cs" />
-    <Compile Include="Model\WebSite.cs" />
+    <Compile Include="Web\GratkaWebSite.cs" />
+    <Compile Include="Web\LandOffer.cs" />
+    <Compile Include="Web\Location.cs" />
+    <Compile Include="Web\TextAnalyzer.cs" />
+    <Compile Include="Web\WebSite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
