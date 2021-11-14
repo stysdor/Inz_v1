@@ -16,8 +16,8 @@ namespace ML
 {
     class Program
     {
-        static readonly string _trainDataPath = Path.Combine(Environment.CurrentDirectory, "Data", "LandOffers1.csv");
-        static readonly string _testDataPath = Path.Combine(Environment.CurrentDirectory, "Data", "LandOffers1-test.csv");
+        static readonly string _trainDataPath = Path.Combine(Environment.CurrentDirectory, "Data", "LandOffer3-train.csv");
+        static readonly string _testDataPath = Path.Combine(Environment.CurrentDirectory, "Data", "LandOffer3-test.csv");
         static readonly string _modelPath = Path.Combine(Environment.CurrentDirectory, "Data", "Model.zip");
 
         static void Main(string[] args)
@@ -32,20 +32,20 @@ namespace ML
         public static ITransformer Train(MLContext mLContext, string dataPath)
         {
             //Load data
-            IDataView dataView = mLContext.Data.LoadFromTextFile<Land>(dataPath, hasHeader: true, separatorChar: ';');
+            IDataView dataView = mLContext.Data.LoadFromTextFile<Land>(dataPath, hasHeader: false, separatorChar: ';');
 
-            #region Tranform missing values
-            // Define replacement estimator
-            var replacementEstimator = mLContext.Transforms.ReplaceMissingValues("Price", replacementMode: MissingValueReplacingEstimator.ReplacementMode.Maximum);
+            //#region Tranform missing values
+            //// Define replacement estimator
+            //var replacementEstimator = mLContext.Transforms.ReplaceMissingValues("Road", replacementMode: MissingValueReplacingEstimator.ReplacementMode.);
 
-            // Fit data to estimator
-            // Fitting generates a transformer that applies the operations of defined by estimator
-            ITransformer replacementTransformer = replacementEstimator.Fit(dataView);
+            //// Fit data to estimator
+            //// Fitting generates a transformer that applies the operations of defined by estimator
+            //ITransformer replacementTransformer = replacementEstimator.Fit(dataView);
+            IDataView transformedData = dataView;
+            //// Transform data
+            //IDataView transformedData = replacementTransformer.Transform(dataView);
 
-            // Transform data
-            IDataView transformedData = replacementTransformer.Transform(dataView);
-
-            #endregion
+            //#endregion
 
             Action<InputRow, OutputRow> mapping = (input, output) =>
             {
@@ -57,7 +57,7 @@ namespace ML
                             .Append(mLContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "RoadEncoded", inputColumnName: "Road"))
                             .Append(mLContext.Transforms.CustomMapping(mapping, null))
                             .Append(mLContext.Transforms.Concatenate("Features", "Area", "RoadEncoded", "N_latitudeConverted", "E_longitudeConverted"))
-                            .Append(mLContext.Regression.Trainers.FastTree());
+                            .Append(mLContext.Regression.Trainers.Sdca());
 
             var model = pipeline.Fit(transformedData);
 
@@ -67,7 +67,7 @@ namespace ML
 
         private static void Evaluate(MLContext mLContext, ITransformer model)
         {
-            IDataView dataView = mLContext.Data.LoadFromTextFile<Land>(_testDataPath, hasHeader: true, separatorChar: ';');
+            IDataView dataView = mLContext.Data.LoadFromTextFile<Land>(_testDataPath, hasHeader: false, separatorChar: ';');
 
             var predictions = model.Transform(dataView);
 

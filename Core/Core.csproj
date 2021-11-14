@@ -47,6 +47,8 @@
     <Compile Include="Domain\Land.cs" />
     <Compile Include="Domain\LandOffer.cs" />
     <Compile Include="Domain\Location.cs" />
+    <Compile Include="Interfaces\ILandOfferRepository.cs" />
+    <Compile Include="Interfaces\ILandRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,12 @@ namespace ML.Model
         //public bool IsWater;
         //public bool IsSewers;
 
+        Action<InputRow, OutputRow> mapping = (input, output) =>
+        {
+            output.E_longitudeConverted = (float)Convert.ToDouble(input.E_longitude);
+            output.N_latitudeConverted = (float)Convert.ToDouble(input.N_latitude);
+        };
+
     }
 
     public class LandPricePrediction

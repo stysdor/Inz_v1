@@ -38,5 +38,7 @@ namespace BusinessLogic.NHibernate
             new SchemaExport(configuration);
         }
         #endregion
+
+
     }
 }

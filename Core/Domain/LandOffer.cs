@@ -20,5 +20,9 @@ namespace Core.Domain
         public virtual Location Location { get; set; }
         public virtual string Description { get; set; }
         public virtual DateTime OfferDateTime { get; set; }
+        public virtual bool IsElectricity { get; set; }
+        public virtual bool IsGas { get; set; }
+        public virtual bool IsWater { get; set; }
+        public virtual bool IsSewers { get; set; }
     }
 }

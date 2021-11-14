@@ -102,7 +102,7 @@ namespace BusinessLogic.Logic.Web
 
         public List<LandOffer> GetLandOffersFromWebsite()
         {
-            return this.GetLands(this.TakeOfferLinks());
+             return this.GetLands(this.TakeOfferLinks());
         }
 
         public List<LandOffer> GetLands(List<string> urlList)

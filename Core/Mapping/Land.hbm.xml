@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping namespace="Core.Domain" assembly="Core" xmlns="urn:nhibernate-mapping-2.2">
   <class name="Land" table="Land">
-    <id name="Id" column="Id" type="Int32">
-      <generator class="native" />
-    </id>
+    <id name="Id" column="Id" type="Int32" />
     <property name="Area"  />
     <property name="Price"   />
-    <property name="IsElectricity"  />
-    <property name="IsGas"  />
-    <property name="IsWater"   />
-    <property name="IsSewers"   />
-    <property name="Type"  />
+    <property name="IsElectricity"  type="TrueFalse"/>
+    <property name="IsGas" type="TrueFalse" />
+    <property name="IsWater"  type="TrueFalse" />
+    <property name="IsSewers"  type="TrueFalse" />
+    <property name="Type" not-null="false" />
     <property name="Road"   />
     <many-to-one name="Location" class="Core.Domain.Location" column="LocationId" fetch="select" lazy="false" cascade="save-update" />
   </class>

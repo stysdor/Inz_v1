@@ -12,13 +12,13 @@ namespace BusinessLogic.Logic.Web
     public class GratkaWebSite: WebSite
     {
         //Url of the website
-        public override string Url => "https://gratka.pl/nieruchomosci/dzialki-grunty/rzeszow/sprzedaz";
+        public override string Url => "https://gratka.pl/nieruchomosci/dzialki-grunty/rzeszow";
         //xPaths to get informations from the website
-        public override string OfferCount_xPath => "//span[@class='content__offerCount']";
-        public override string Url_xPath => "//article[@class='teaserEstate ']";
+        public override string OfferCount_xPath => "//span[@class='listingHeader__offersCount ']";
+        public override string Url_xPath => "//article[@role='link']";
         public override string Area_xPath => "//li[span[contains(text(),'Powierzchnia działki w m2')]]/b";
         public override string Price_xPath => "//span[@class='priceInfo__value']";
-        public override string Location_xPath => "//div[@id='item-map']/following-sibling::script[1]";
+        public override string Location_xPath => "//div[@class='localizationModal']/following-sibling::script[1]";
         public override string Electricity_xPath => "//li[span[contains(text(),'Prąd')]]/b";
         public override string Sewers_xPath => "//li[span[contains(text(),'Kanalizacja')]]/b";
         public override string Water_xPath => "//li[span[contains(text(),'Woda')]]/b";
@@ -30,7 +30,7 @@ namespace BusinessLogic.Logic.Web
         {
             int offerCount = 0;
             HtmlWeb web = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlDocument doc = new HtmlDocument();
             doc = web.Load(Url);
 
             if (doc.DocumentNode.SelectNodes(OfferCount_xPath) != null)
@@ -48,7 +48,7 @@ namespace BusinessLogic.Logic.Web
         {
             // declaring & loading dom
             HtmlWeb web = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            HtmlDocument doc = new HtmlDocument();
             doc = web.Load(Url);
 
             //create new list of url string

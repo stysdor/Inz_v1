@@ -11,7 +11,7 @@ namespace Test
         [TestMethod]
         public void GettingDataFromGratkaWebSiteTest()
         {
-            string url = "https://gratka.pl/nieruchomosci/dzialka-budowlana-z-pozwoleniem-i-projektem-ul-potokowa-wywrockiego-rzeszow/oi/15890733";
+            string url = "https://gratka.pl/nieruchomosci/dzialka-budowlana-rzeszow-zaleze-ul-spichlerzowa/ob/21004923";
             // declaring & loading dom
             HtmlWeb web = new HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();

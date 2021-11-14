@@ -15,5 +15,9 @@
     <property name="Description"   />
     <many-to-one name="Location" class="Core.Domain.Location" column="LocationId" fetch="select" lazy="false" cascade="save-update" />
     <property name="OfferDateTime" />
+    <property name="IsElectricity" type="Boolean" />
+    <property name="IsGas" column="isGas" type="Boolean"/>
+    <property name="IsWater" column="isWater" type="Boolean"/>
+    <property name="IsSewers" column="isSewers" type="Boolean"/>
   </class>
 </hibernate-mapping>
