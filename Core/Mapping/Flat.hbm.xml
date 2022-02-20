@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="Core.Domain" assembly="Core" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Flat" table="Flat">
+    <id name="Id" column="Id" type="Int32">
+      <generator class="native" />
+    </id>
+    <property name="Area"  />
+    <property name="Price"  />
+    <property name="Description"   />
+    <many-to-one name="Location" class="Core.Domain.Location" column="LocationId" fetch="select" lazy="false" cascade="save-update" />
+    <property name="OfferDateTime" />
+    <property name="RoomNumber" />
+    <property name="Floor" />
+    <property name="FloorInBuilding" />
+    <property name="ConstructionYear" />
+    <property name="TypeOfBuilding" />
+    <property name="IsBalcony" type="Boolean" />
+    <property name="IsGarden" type="Boolean" />
+    <property name="IsTarrace" type="Boolean" />
+    <property name="IsLoggia" type="Boolean" />
+    <property name="IsCellar" type="Boolean" />
+    <property name="IsGarage" type="Boolean" />
+    <property name="IsParkingSpace" type="Boolean" />
+    <property name="IsLift" type="Boolean" />
+    <property name="IsAccepted" type="Boolean" />
+    <property name="Kitchen"  />
+    <property name="State"  />
+    <property name="Market"  />
+    <many-to-one name="FlatLink" 
+                class="Core.Domain.FlatLink"  
+                column="FlatLinkId" 
+                fetch="select" 
+                lazy="false" 
+                cascade="save-update" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+.forbidden-container {
+  text-align: center;
+  h1 {
+      font-size: 4em;
+      margin: 1em auto 0.5em;
+      font-weight: bold;
+  }
+  .forbidden-text {
+      justify-content: center;
+      align-items: stretch;
+  }
+  span {
+      font-size: 2em;
+      text-transform: uppercase;
+   }
+  mat-icon {
+      font-size: 6em;
+      margin-top: 0.5em;
+      margin-right: 0.75em;
+  }
+}

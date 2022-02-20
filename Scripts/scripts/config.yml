@@ -1,0 +1,17 @@
+etl:
+  raw_data_file: "data/flats.csv"
+  processed_path: "data"
+  test_size: 0.2
+
+train:
+  processed_train: "data/train.csv" 
+  model_config: {n_estimators: 100, random_state: 42}
+  model_path: "model/model.pkl"
+  scaler_path: "model/scaler.pkl"
+
+predict:
+  model_path: "model/model.pkl"
+  scaler_path: "model/scaler.pkl"
+  processed_test: "data/test.csv"
+  predicted_file: "data/predict.csv"
+  export_result: True 

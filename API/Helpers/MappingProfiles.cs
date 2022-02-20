@@ -10,7 +10,8 @@ namespace API.Helpers
         {
             CreateMap<Location, LocationDTO>().ReverseMap();
             CreateMap<LandOffer, LandOfferDTO>().ReverseMap();
-            CreateMap<Land, LandDTO>().ReverseMap();
+            CreateMap<Flat, FlatDTO>().ReverseMap();
+            CreateMap<User, UserDTO>().ReverseMap();
             
         }
     }

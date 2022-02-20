@@ -1,0 +1,77 @@
+<!--<div class="flat-list-container">
+  <ng-container *ngIf="!flats">
+    <p>Nie ma żadnych ofert mieszkań do pokazania.</p>
+  </ng-container>
+
+  <div *ngIf="flats" class="flat-list">
+    <div *ngFor="let flat of flats" class="flat-list-item">
+      <app-flat-list-item [flat]="flat"
+                          [checkedList]="checkedList">
+
+      </app-flat-list-item>
+    </div>
+  </div>
+</div>-->
+
+<table mat-table [dataSource]="flats" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  <!-- Position Column -->
+  <ng-container matColumnDef="area">
+    <th mat-header-cell *matHeaderCellDef> <fa-icon [icon]="areaIcon"></fa-icon><span class="d-none d-lg-inline-block">Powierzchnia</span> </th>
+    <td mat-cell *matCellDef="let element"> {{element.area}} m<sup>2</sup> </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef><fa-icon [icon]="priceIcon" class="d-none d-sm-inline-block"></fa-icon> Cena </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} zł</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="roomNumber">
+    <th mat-header-cell *matHeaderCellDef><fa-icon [icon]="roomIcon"></fa-icon><span class="d-none d-lg-inline-block"> Liczba pokoi</span> </th>
+    <td mat-cell *matCellDef="let element"> {{element.roomNumber}} p. </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="floor">
+    <th mat-header-cell *matHeaderCellDef> Piętro </th>
+    <td mat-cell *matCellDef="let element"> {{element.floor}} / {{element.floorInBuilding}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="constructionYear">
+    <th mat-header-cell *matHeaderCellDef><fa-icon [icon]="constructionIcon"></fa-icon><span class="d-none d-lg-inline-block"> Rok budowy</span> </th>
+    <td mat-cell *matCellDef="let element"> {{element.constructionYear}}r. </td>
+  </ng-container>
+
+  <ng-container matColumnDef="car">
+    <th mat-header-cell *matHeaderCellDef><fa-icon [icon]="carIcon"></fa-icon><span class="d-none d-lg-inline-block"> Miejsce na samochód</span> </th>
+    <td mat-cell *matCellDef="let element"> {{element.isGarage ? 'Garaż' : element.isParkingSpace ? 'Miejsce parkingowe' : 'brak'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="other">
+    <th mat-header-cell *matHeaderCellDef> Inne </th>
+    <td mat-cell *matCellDef="let flat"> {{flat.isLift ? 'Winda ' : ''}}{{flat.isBalcony ? 'Balkon ' : ''}}{{flat.isTarrace ? 'Taras ' : ''}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="market">
+    <th mat-header-cell *matHeaderCellDef> Rynek </th>
+    <td mat-cell *matCellDef="let element"> {{element.market}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef><fa-icon [icon]="stateIcon"></fa-icon><span>Stan</span> </th>
+    <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+  </ng-container>
+
+  <ng-container *ngIf="checkedList" matColumnDef="isAccepted">
+    <th mat-header-cell *matHeaderCellDef><span class="d-none d-md-inline-block">Akceptuj</span></th>
+    <td mat-cell *matCellDef="let element"> <mat-checkbox (change)="onSelectionChanged($event, element)" [checked]="element.isAccepted" name="element.id"></mat-checkbox> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

@@ -1,0 +1,103 @@
+<div class="form-container">
+  <h1 class="title">Oszacuj wartość mieszkania</h1>
+    <mat-stepper #stepper [orientation]="(stepperOrientation$ | async)!">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Lokalizacja</ng-template>
+          <mat-form-field appearance="fill" class="form-control">
+            <mat-label>Lokalizacja</mat-label>
+            <input matInput placeholder="Lokalizacja" formControlName="location" required>
+            <mat-error *ngIf="firstFormGroup.controls.location.hasError('required')">Lokalizacja jest wymagana.</mat-error>
+          </mat-form-field>
+          <div class="step-buttons">
+            <button mat-button matStepperNext>Dalej</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup" label="Parametry mieszkania">
+        <form [formGroup]="secondFormGroup">
+          <div class="form-control-group">
+            <mat-form-field appearance="fill" class="form-control">
+              <mat-label>Powierzchnia</mat-label>
+              <input matInput placeholder="Powierzchnia" type="number" formControlName="area" required>
+              <span matSuffix>m2</span>
+              <mat-error *ngIf="secondFormGroup.controls.area.hasError('required')">Powierzchnia jest wymagana.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-control">
+              <mat-label>Liczba pokoi</mat-label>
+              <input type="number" step="1" min="0" max="100" matInput placeholder="Liczba pokoi" formControlName="roomNumber">
+            </mat-form-field>
+          </div>
+
+          <div class="form-control-group">
+            <mat-form-field appearance="fill" class="form-control">
+              <mat-label>Piętro</mat-label>
+              <input type="number" step="1" min="0" max="100" matInput placeholder="Piętro" formControlName="floor">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-control">
+              <mat-label>Liczba pięter w budynku</mat-label>
+              <input type="number" step="1" min="0" max="100" matInput placeholder="Piętro" formControlName="floorInBuilding">
+            </mat-form-field>
+          </div>
+
+          <div class="radio-buttons">
+            <label>Rynek:  </label>
+            <mat-radio-group formControlName="market">
+              <mat-radio-button value="pierwotny">Pierwotny</mat-radio-button>
+              <mat-radio-button value="wtórny">Wtórny</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <mat-form-field appearance="fill" class="form-control">
+            <mat-label>Stan</mat-label>
+            <mat-select formControlName="state" name="state">
+              <mat-option *ngFor="let state of states" [value]="state">
+                {{state}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="step-buttons">
+            <button mat-button matStepperPrevious>Wróć</button>
+            <button mat-button matStepperNext>Dalej</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup">
+        <ng-template matStepLabel>Dodatkowe informacje</ng-template>
+        <form [formGroup]="thirdFormGroup" class="checkbox-form">
+          <mat-label>Dodatkowe miejsce do wypoczynku:</mat-label>
+          <div class="checkbox-wrapper">
+            <mat-checkbox formControlName="isBalcony">Balkon</mat-checkbox>
+            <mat-checkbox formControlName="isTarrace">Taras</mat-checkbox>
+            <mat-checkbox formControlName="isLoggia">Loggia</mat-checkbox>
+            <mat-checkbox formControlName="isGarden">Ogród</mat-checkbox>
+          </div>
+          <mat-label>Miejsce na samochód:</mat-label>
+          <div class="checkbox-wrapper">
+            <mat-checkbox formControlName="isParkingSpace">Miejsce parkingowe</mat-checkbox>
+            <mat-checkbox formControlName="isGarage">Garaż</mat-checkbox>
+          </div>
+</form>
+        <div *ngIf="error" class="error">
+          <mat-error>{{error}}</mat-error>
+        </div>
+
+        <button [disabled]="thirdFormGroup.invalid"
+                mat-raised-button
+                color="accent"
+                type="submit"
+                class="button ">
+          Wyceń
+        </button>
+        <div class="step-buttons">
+          <button mat-button matStepperPrevious>Wróć</button>
+          <button mat-button (click)="stepper.reset()">Wyczyść</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+ </div>
+

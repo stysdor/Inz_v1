@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="Core.Domain" assembly="Core" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="User" table="Users">
+    <id name="Id" column="Id" type="Int32">
+      <generator class="native" />
+    </id>
+    <property name="UserName"  />
+    <property name="FirstName"  />
+    <property name="LastName"  />
+    <property name="Email"  />
+    <property name="Password"  />
+  </class>
+</hibernate-mapping>

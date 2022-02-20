@@ -1,0 +1,19 @@
+<div class="list-container">
+  <header>
+    <h1 class="list-title">Baza ofert mieszkaniowych</h1>
+  </header>
+  <main>
+    <ng-container *ngIf="flats">
+      <mat-paginator [length]="totalCount"
+                     [pageSize]="flatParams.pageSize"
+                     [pageSizeOptions]="[6, 12, 24]"
+                     [hidePageSize]="true"
+                     showFirstLastButtons="true"
+                     (page)="onPageChanged($event)"
+                     aria-label="Select page">
+      </mat-paginator>
+      <app-flat-list [flats]="flats"></app-flat-list>
+    </ng-container>
+  </main>
+</div>
+

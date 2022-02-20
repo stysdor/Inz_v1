@@ -1,6 +1,6 @@
-﻿using BusinessLogic.Logic.Web;
+﻿using BusinessLogic.Interfaces;
+using BusinessLogic.Logic.Web;
 using Core.Domain;
-using Core.Interfaces;
 using NHibernate;
 using System;
 using System.Collections.Generic;

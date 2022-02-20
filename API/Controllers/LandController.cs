@@ -1,13 +1,10 @@
 ﻿using API.ModelDTO;
 using AutoMapper;
+using BusinessLogic.Interfaces;
 using Core.Domain;
-using Core.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -15,13 +12,11 @@ namespace API.Controllers
     public class LandController : BaseApiController
     {
         private readonly ILandOfferRepository landOfferRepository;
-        private readonly ILandRepository landRepository;
         private readonly IMapper mapper;
 
-        public LandController(ILandOfferRepository landOfferRepository, ILandRepository landRepository, IMapper mapper)
+        public LandController(ILandOfferRepository landOfferRepository, IMapper mapper)
         {
             this.landOfferRepository = landOfferRepository;
-            this.landRepository = landRepository;
             this.mapper = mapper;
         }
 
@@ -38,12 +33,12 @@ namespace API.Controllers
             return Ok(landOfferRepository.DownloadLandOffers());
         }
 
-        [HttpGet("lands")]
-        public ActionResult<IReadOnlyList<LandOfferDTO>> GetLands()
-        {
-            var data = landRepository.GetLands();
-            return Ok(mapper.Map<IReadOnlyList<Land>, IReadOnlyList<LandDTO>>(data));
-        }
+        //[HttpGet("lands")]
+        //public ActionResult<IReadOnlyList<LandOfferDTO>> GetLands()
+        //{
+        //    var data = landRepository.GetLands();
+        //    return Ok(mapper.Map<IReadOnlyList<Land>, IReadOnlyList<LandDTO>>(data));
+        //}
 
         [HttpPost("addland")]
         public ActionResult<bool> UpdateLand(LandOfferDTO land)

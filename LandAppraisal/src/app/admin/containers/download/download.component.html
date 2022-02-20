@@ -1,0 +1,42 @@
+<div class="download-container">
+  <header>
+  <h1 class="header">
+    Pobierz nowe ogłoszenia
+  </h1>
+</header>
+  <main>
+    <div>
+      <p>Ze względu na dużą ilość ogłoszeń proces pobierania nowych ogłoszeń został podzielony na kilka etapów.</p>
+      <p>Prosimy o cierpliwość.</p>
+    </div>
+    <mat-stepper [orientation]="(stepperOrientation$ | async)!">
+      <mat-step>
+        <ng-template matStepLabel>Krok 1 - pobranie linków do ofert</ng-template>
+        <ng-template matStepContent>
+          <p>Pobierz linki do nowych ogłoszeń <fa-icon [icon]="arrowIcon"></fa-icon>
+          <button mat-raised-button (click)="downloadLinks()">Pobierz</button></p>
+          <p *ngIf="linkCount$ | async as count">Pobrano {{count}} ogłoszeń.</p>
+          <button mat-button matStepperNext>Dalej</button>
+        </ng-template>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Krok 2 - pobranie ofert</ng-template>
+        <p>Pobierz ogłoszenia mieszkań z linków.</p>
+        <form [formGroup]="countForm">
+          <p>
+            Wybierz ilość ogłoszeń do pobrania:
+            <mat-form-field appearance="fill" class="form-control">
+              <input matInput type="number" min="1" formControlName="count">
+            </mat-form-field>
+
+            <fa-icon [icon]="arrowIcon"></fa-icon>
+            <button mat-raised-button (click)="downloadFlats()">Pobierz</button>
+          </p>
+        </form>
+        <p *ngIf="isDownload$ | async ">Pobrano ogłoszenia.</p>
+        <button mat-button matStepperPrevious>Cofnij</button>
+      </mat-step>
+    </mat-stepper>
+  </main>
+ </div>
+

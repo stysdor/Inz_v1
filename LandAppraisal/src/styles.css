@@ -2,3 +2,31 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  background-color: #9e9f9c;
+  background-image: url('assets/bg.jpg');
+  min-height: 100vh;
+  background-position: center; 
+  background-repeat: repeat-y; 
+  background-size: cover;
+}
+
+/* Variables*/
+:root {
+  --black-color: #252525;
+  --white-color: #ffffff;
+  --light-color: #f7F0F0;
+  --accent-color: #FA5F1A;
+
+  --sm: 576px;
+  --md: 768px;
+  --lg: 992px;
+  --xl: 1200px;
+  --xxl: 1400px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: val(--accent-color) !important;
+}
+

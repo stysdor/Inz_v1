@@ -44,21 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Land.cs" />
+    <Compile Include="Domain\Flat.cs" />
+    <Compile Include="Domain\FlatLink.cs" />
     <Compile Include="Domain\LandOffer.cs" />
     <Compile Include="Domain\Location.cs" />
-    <Compile Include="Interfaces\ILandOfferRepository.cs" />
-    <Compile Include="Interfaces\ILandRepository.cs" />
+    <Compile Include="Domain\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Mapping\Land.hbm.xml" />
+    <EmbeddedResource Include="Mapping\Flat.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Mapping\LandOffer.hbm.xml" />
     <EmbeddedResource Include="Mapping\Location.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\User.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mapping\FlatLink.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

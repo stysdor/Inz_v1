@@ -1,0 +1,39 @@
+<div class="form-container">
+  <h1>Zaloguj się</h1>
+  <form class="form-floating" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="form-control">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" formControlName="email" required>
+      <mat-error *ngIf="signinForm.controls.email.hasError('required')">Email jest wymagany.</mat-error>
+      <mat-error *ngIf="signinForm.controls.email.hasError('pattern')">Wprowadź poprawny adres email.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-control">
+      <mat-label>Hasło</mat-label>
+      <button mat-icon-button matSuffix (click)="toggleHide()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Hasło" formControlName="password" required>
+      <mat-error *ngIf="signinForm.controls.password.hasError('required')">Hasło jest wymagane.</mat-error>
+    </mat-form-field>
+
+    <div  class="error">
+      <mat-error *ngIf="error">{{error}}</mat-error>
+    </div>
+    <div class="error">
+      <mat-error>{{errorAPI$ | async}}</mat-error>
+    </div>
+
+    <button [disabled]="signinForm.invalid"
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="button">
+      Zaloguj
+    </button>
+  </form>
+  <p class="text-under-form">Nie masz konta? <a routerLink="/account/register">Utwórz konto</a></p>
+</div>
+
+
+

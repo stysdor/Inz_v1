@@ -1,0 +1,62 @@
+.flat-list-container {
+width: 100%;
+}
+
+table {
+  width: 100%;
+  background-color: var(--light-color);
+}
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 5px;
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  padding-right: 5px;
+}
+
+.mat-column-area, .mat-column-price, .mat-column-roomNumber,
+.mat-column-floor, .mat-column-car, .mat-column-other, .mat-column-constructionYear,
+.mat-column-state, .mat-column-market, .mat-column-isAccepted {
+  text-align: center;
+  font-size: 12px;
+}
+
+.mat-column-other, .mat-column-state, .mat-column-car {
+  display: none;
+}
+
+fa-icon {
+margin-right: 5px;
+}
+
+@media (min-width: 576px) {
+  .mat-column-car {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 992px) {
+  .mat-column-other, .mat-column-state {
+      display: table-cell;
+  }
+
+  th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+    padding-left: 12px;
+  }
+  th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding-right: 12px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mat-column-area, .mat-column-price, .mat-column-roomNumber,
+  .mat-column-floor, .mat-column-car, .mat-column-other, .mat-column-constructionYear,
+  .mat-column-state, .mat-column-market {
+    font-size: 14px;
+  }
+
+  table {
+      padding: 0 12px;
+  }
+ }
+

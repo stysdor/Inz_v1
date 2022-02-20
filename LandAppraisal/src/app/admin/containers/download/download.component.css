@@ -1,0 +1,63 @@
+.download-container {
+  padding: 20px 10px;
+  width: 100%;
+}
+.header {
+  font-size: 20px;
+}
+.download-container p, mat-stepper, button {
+  font-size: 12px;
+}
+
+button {
+width: 100%;
+margin-top: 10px;
+}
+
+mat-stepper {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+mat-form-field {
+  background: none;
+  border:none;
+  display: inline-block;
+  width: 100px;
+}
+
+fa-icon {
+margin-left: 10px;
+margin-right: 10px;
+}
+
+@media (min-width: 576px) {
+  .download-container {
+    padding: 20px;
+  }
+  button {
+      width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .download-container {
+    padding: 30px;
+  }
+
+  .header {
+    font-size: 26px;
+  }
+
+  .download-container p, mat-stepper, button {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .download-container p, mat-stepper, button {
+    font-size: 16px;
+  }
+  mat-stepper {
+      text-align: center;
+  }
+}

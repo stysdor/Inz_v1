@@ -1,0 +1,27 @@
+.list-container {
+  padding: 20px 10px;
+  width: 100%;
+}
+
+.list-title {
+  font-size: 20px;
+}
+
+mat-paginator {
+  background: none;
+}
+
+@media (min-width: 576px) {
+  .list-container {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .list-container {
+    padding: 30px;
+  }
+  .list-title {
+    font-size: 26px;
+  }
+}

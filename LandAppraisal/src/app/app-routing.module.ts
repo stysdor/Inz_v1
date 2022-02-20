@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+import { HomeComponent } from './core/containers/home/home.component';
+import { AuthGuard } from './shared/interceptor/auth-guard.service';
 
 const routes: Routes = [
   {
-    path: 'account',
-    loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: 'land-offers',
-    loadChildren: () => import('./land-offers/land-offers.module').then(m => m.LandOffersModule),
+    path: 'flats',
+    loadChildren: () => import('./flats/flats.module').then(m => m.FlatsModule)
   },
   {
-    path: 'lands',
-    loadChildren: () => import('./lands/lands.module').then(m => m.LandsModule)
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+   // canActivate: [AuthGuard]
   },
   {
     path: '',
-    component: AppComponent
+    component: HomeComponent
   }
 ];
 
@@ -26,6 +28,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes)
   ],
+  providers: [AuthGuard],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

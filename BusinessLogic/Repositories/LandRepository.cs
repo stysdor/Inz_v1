@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.NHibernate;
 using Core.Domain;
-using Core.Interfaces;
 using NHibernate;
 using System;
 using System.Collections.Generic;
@@ -8,12 +7,12 @@ using System.Linq;
 
 namespace BusinessLogic.Repositories
 {
-    public class LandRepository : BaseRepository, ILandRepository
+    public class LandRepository : BaseRepository
     {
         public LandRepository(global::NHibernate.ISession session) : base(session)
         {
         }
-        public void UpdateLand(Land land)
+        public void UpdateLand(LandOffer land)
         {
             Console.WriteLine(land.Id);
 
@@ -42,13 +41,13 @@ namespace BusinessLogic.Repositories
             }
         }
 
-        public IReadOnlyList<Land> GetLands()
+        public IReadOnlyList<LandOffer> GetLands()
         {
             try
             {
                 using (session)
                 {
-                    var lands = session.Query<Land>().ToList();
+                    var lands = session.Query<LandOffer>().ToList();
                     return lands;
                 }
             }
