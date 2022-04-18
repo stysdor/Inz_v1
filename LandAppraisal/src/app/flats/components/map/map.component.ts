@@ -18,8 +18,8 @@ export class MapComponent implements OnInit, OnDestroy {
   options: Options = options as Options;
   coordinates: { latitude: number; longitude: number; };
 
-  @Input() flatLatitude!: number;
-  @Input() flatLongitude!: number;
+  @Input() flatLatitude!: number | undefined;
+  @Input() flatLongitude!: number | undefined;
 
   @Output() coordinatesEmmiter: EventEmitter<{ latitude: number; longitude: number }> = new EventEmitter < { latitude: number; longitude: number } >()
 

@@ -19,6 +19,7 @@ import { MapComponent } from './components/map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { PredictionComponent } from './containers/prediction/prediction.component';
+import { API_KEY } from '../secret';
 
 const routes: Routes = [
   {
@@ -52,7 +53,7 @@ const routes: Routes = [
     MatTableModule,
     MatSortModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCPvNmzyc0Yz4vgMW4aE9KH3K5jpZa_6xI',
+      apiKey: API_KEY,
       libraries: ['places']
     }),
     GooglePlaceModule
