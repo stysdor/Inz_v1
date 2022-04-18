@@ -1,10 +1,10 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, Inject, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ROOT_REDUCERS } from './store/app.reducer';
 import { AppEffects } from './store/app.effects';
@@ -17,6 +17,7 @@ import { AuthGuard } from './shared/interceptor/auth-guard.service';
 import { LoaderInterceptorService } from './shared/interceptor/loader-interceptor.service';
 import { AgmCoreModule } from '@agm/core';
 import { API_KEY } from './secret';
+import { appInitializer } from './shared/interceptor/AppInitializer';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { API_KEY } from './secret';
     })
   ],
   providers: [
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [[new Inject(Store)]] },
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }
   ],

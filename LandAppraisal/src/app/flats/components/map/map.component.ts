@@ -16,7 +16,7 @@ export class MapComponent implements OnInit, OnDestroy {
   map!: google.maps.Map;
   mapClickListener!: google.maps.MapsEventListener;
   options: Options = options as Options;
-  coordinates: { latitude: number; longitude: number; };
+  coordinates!: { latitude: number; longitude: number; };
 
   @Input() flatLatitude!: number | undefined;
   @Input() flatLongitude!: number | undefined;
@@ -24,10 +24,10 @@ export class MapComponent implements OnInit, OnDestroy {
   @Output() coordinatesEmmiter: EventEmitter<{ latitude: number; longitude: number }> = new EventEmitter < { latitude: number; longitude: number } >()
 
   constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {
-    this.coordinates = { latitude: this.flatLatitude ?? 0, longitude: this.flatLongitude ?? 0 };
   }
 
   ngOnInit() {
+    this.coordinates = { latitude: this.flatLatitude ?? 0, longitude: this.flatLongitude ?? 0 };
     this.mapsAPILoader.load().then(() => {});
   }
 

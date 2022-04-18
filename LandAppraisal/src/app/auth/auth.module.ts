@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './containers/login/login.component';
-import { RegisterComponent } from './containers/register/register.component';
 import { ForbiddenComponent } from './containers/forbidden/forbidden.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +12,6 @@ import { AccountRoutingModule } from '../auth/account-routing.module';
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent,
     ForbiddenComponent
   ],
   imports: [

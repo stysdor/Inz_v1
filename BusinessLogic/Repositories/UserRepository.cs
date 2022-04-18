@@ -76,9 +76,8 @@ namespace BusinessLogic.Repositories
             }
         }
 
-        public bool ValidateUser(string userName, string password)
+        public User ValidateUser(string userName, string password)
         {
-            bool isValidate = false;
             Console.WriteLine(userName, password);
 
             try
@@ -90,10 +89,10 @@ namespace BusinessLogic.Repositories
                         .ToList();
                     if (!(user == null) && string.Equals(user[0].Password, password))
                     {
-                        isValidate = true;
+                        return user[0];
                     }
                     session.Close();
-                    return isValidate;
+                    return null;
                 }
             }
             catch (Exception e)

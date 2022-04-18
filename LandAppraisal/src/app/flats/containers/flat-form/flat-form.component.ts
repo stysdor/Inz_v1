@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { StepperOrientation } from '@angular/cdk/stepper';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,7 +14,7 @@ import { FlatService } from '../../services/flat.service';
   styleUrls: ['./flat-form.component.css']
 })
 export class FlatFormComponent  {
-  flat: FlatToPrediction;
+  flat: FlatToPrediction | null;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -83,6 +83,10 @@ export class FlatFormComponent  {
     }
 
     this.flatService.getPricePrediction(flat).subscribe();
+  }
+
+  onReset(): void {
+    this.flat = null;
   }
 
 }

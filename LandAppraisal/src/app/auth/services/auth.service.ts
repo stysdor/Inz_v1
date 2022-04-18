@@ -4,8 +4,7 @@ import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Router } from '@angular/router';
-import { LoginResponse } from '../models/userResponse';
+import { Params, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +19,10 @@ export class AuthService {
   ) { }
 
   login(email: string, password: string): Observable<User> {
-    return this.http.post<LoginResponse>(this.baseUrl + 'auth/login', { email, password }, { withCredentials: true })
+    return this.http.post<User>(this.baseUrl + 'auth/login', { email, password }, { withCredentials: true })
       .pipe(
-        tap((response: LoginResponse) => this.setCurrentUser(response)),
-        map((response: LoginResponse) => response.user),
-        catchError(error => {
-          return throwError(error);
-        }),
-        shareReplay()
-      );
-  }
-
-  register(values: User): Observable<User> {
-    return this.http.post<LoginResponse>(this.baseUrl + 'auth/register', values)
-      .pipe(
-        tap((response: LoginResponse) => this.setCurrentUser(response)),
-        map((response: LoginResponse) => response.user),
+        tap((response: User) => this.setCurrentUser(response)),
+        map((response: User) => response),
         catchError(error => {
           return throwError(error);
         }),
@@ -48,8 +35,8 @@ export class AuthService {
   }
 
   loadCurrentUser(): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'auth/getUser',)
-      .pipe();
+    const userName = this.getToken('token');
+    return this.http.get<User>(this.baseUrl + 'auth/getUser', { params: { userName: userName } } as Params);
   }
 
   checkEmailExists(email: string): Observable<boolean> {
@@ -65,9 +52,9 @@ export class AuthService {
     this.router.navigateByUrl(this.baseUrl + 'account/forbidden');
   }
 
-  private setCurrentUser(response: LoginResponse): void {
-    if (!response.user) return;
-    this.setToken('token', response.user.userName);
+  private setCurrentUser(response: User): void {
+    if (!response) return;
+    this.setToken('token', response.userName);
   }
 
   private setToken(key: string, token: string): void {

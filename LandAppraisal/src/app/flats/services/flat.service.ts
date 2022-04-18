@@ -18,7 +18,7 @@ export class FlatService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getFlats(flatParams: FlatParams): Observable<Pagination<Flat>> {
-    return this.http .get<Pagination<Flat>>(`${this.baseUrl}flat/flats`, { params: flatParams } as Params);
+    return this.http.get<Pagination<Flat>>(`${this.baseUrl}flat/flats`, { params: flatParams } as Params);
   }
 
   downloadFlatLinks(): Observable<number> {
