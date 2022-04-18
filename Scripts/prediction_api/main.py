@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Optional, List
 
 import numpy as np
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -62,16 +62,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def read_root():
-    """
-    root, welcome message
-    """
-
-    return {
-        "message": "this is root, prediction endpoint should be `predict`!, update endpoint should be `update_model`"
-    }
-
 
 @app.post("/predict/")
 def predict_item(sample: Flat):
@@ -82,12 +72,16 @@ def predict_item(sample: Flat):
 
 @app.post("/update_model/")
 def update_model(flats: Flats):
-    res = predictor.update(flats.samples)
-    return {
-        "MseTrain": res["mse_train"],
-        "MseTest": res["mse_test"],
-        "RmseTrain": res["rmse_train"],
-        "RmseTest": res["rmse_test"],
-        "MaeTrain": res["mae_train"],
-        "MaeTest": res["mae_test"],
-    }
+    if (len(flats.samples) > 0):
+        res = predictor.update(flats.samples)
+        return {
+            "MseTrain": res["mse_train"],
+            "MseTest": res["mse_test"],
+            "RmseTrain": res["rmse_train"],
+            "RmseTest": res["rmse_test"],
+            "MaeTrain": res["mae_train"],
+            "MaeTest": res["mae_test"],
+        }
+    else:
+       raise HTTPException(status_code= status.HTTP_404_NOT_FOUND,
+                             detail= f'There is no content to proceed')

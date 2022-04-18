@@ -6,8 +6,8 @@ namespace API.Helpers
     {
         public Pagination(int pageIndex, int pageSize, int count, IReadOnlyList<T> data)
         {
-            PageIndex = pageIndex;
-            PageSize = pageSize;
+            PageIndex = pageIndex > 0 ? pageIndex : 1;
+            PageSize = pageSize > 0 ? pageSize : 24;
             Count = count;
             Data = data;
         }

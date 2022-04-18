@@ -18,7 +18,7 @@
             Pobierz linki do nowych ogłoszeń <fa-icon [icon]="arrowIcon"></fa-icon>
             <button mat-raised-button (click)="downloadLinks()">Pobierz</button>
           </p>
-          <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+          <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner> 
           <p *ngIf="linkCount$ | async as count">Pobrano {{count}} ogłoszeń.</p>
           <button mat-button matStepperNext  >Dalej</button>
         </ng-template>

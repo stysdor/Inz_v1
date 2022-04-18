@@ -1,21 +1,25 @@
-import { registerLocaleData } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FlatToPrediction } from '../../../shared/models/FlatModel';
 
 @Component({
   selector: 'app-prediction',
   templateUrl: './prediction.component.html',
   styleUrls: ['./prediction.component.css']
 })
-export class PredictionComponent implements OnInit {
+export class PredictionComponent  {
   price: number;
+  flat: FlatToPrediction;
 
   constructor(private router: Router) {
     this.price = Math.round(this.router.getCurrentNavigation()?.extras?.state?.price?.prediction);
-    console.log(JSON.stringify(this.router.getCurrentNavigation()?.extras?.state));
+    this.flat = this.router.getCurrentNavigation()?.extras?.state?.flat;
   }
 
-  ngOnInit(): void {
+  goToFlatForm(): void {
+    this.router.navigateByUrl('/flats/form', {
+      state: { flat: this.flat }
+    });
   }
 
 }

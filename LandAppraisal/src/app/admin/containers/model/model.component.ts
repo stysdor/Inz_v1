@@ -30,10 +30,7 @@ export class ModelComponent implements OnInit {
   }
 
   onClick() {
-    this.flatParams.isUsedInModel = false;
-    this.flatParams.isAccepted = true;
-    this.flatParams.pageSize = 10000;
-    this.flatService.feedModel(this.flatParams).pipe(
+    this.flatService.feedModel().pipe(
       tap(response => this.model = response)
     ).subscribe();
   }

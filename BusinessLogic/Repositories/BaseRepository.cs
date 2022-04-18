@@ -1,10 +1,4 @@
-﻿using BusinessLogic.NHibernate;
-using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NHibernate;
 
 namespace BusinessLogic.Repositories
 {
@@ -14,8 +8,6 @@ namespace BusinessLogic.Repositories
         public BaseRepository(ISession session)
         {
             this.session = session;
-            //NHibernateBase nHibernate = new NHibernateBase();
-            //nHibernate.Initialize();
         }
     }
 }

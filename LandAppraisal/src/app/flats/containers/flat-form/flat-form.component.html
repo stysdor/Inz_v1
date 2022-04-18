@@ -4,7 +4,7 @@
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Lokalizacja</ng-template>
-          <app-map (coordinatesEmmiter)="onLocalizationChosen($event)"></app-map>
+          <app-map [flatLatitude]="flat?.n_latitude" [flatLongitude]="flat?.e_longitude" (coordinatesEmmiter)="onLocalizationChosen($event)"></app-map>
           <div class="step-buttons">
             <button mat-button matStepperNext>Dalej</button>
           </div>

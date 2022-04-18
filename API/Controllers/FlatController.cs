@@ -44,7 +44,8 @@ namespace API.Controllers
         public ActionResult<bool> DownloadOffers([FromQuery] int count)
         {
             var links = flatRepository.GetFlatsLinksToGetFlatOffers(count);
-            return Ok(flatRepository.DownloadFlatsFromLinks(links));
+            if (links != null) return Ok(flatRepository.DownloadFlatsFromLinks(links));
+            else return UnprocessableEntity();
         }
 
         [HttpPost("postFlats")]

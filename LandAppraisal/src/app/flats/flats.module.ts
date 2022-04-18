@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FlatListItemComponent } from './components/flat-list-item/flat-list-item.component';
 import { FlatListComponent } from './components/flat-list/flat-list.component';
 import { FlatFormComponent } from './containers/flat-form/flat-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,7 +31,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    FlatListItemComponent,
     FlatListComponent,
     FlatFormComponent,
     MapComponent,
@@ -61,8 +59,7 @@ const routes: Routes = [
 
   ],
   exports: [
-    FlatListComponent,
-    FlatListItemComponent
+    FlatListComponent
   ]
 })
 export class FlatsModule { }

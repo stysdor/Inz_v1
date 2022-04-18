@@ -20,14 +20,11 @@ namespace BusinessLogic.Logic.Web
         public List<Flat> flatOffers;
 
         public abstract int CountOffers();
-
         public abstract List<string> TakeOfferLinks();
-
-        public abstract decimal GetAreaFromUrl(HtmlAgilityPack.HtmlDocument doc);
-        public abstract decimal GetPriceFromUrl(HtmlAgilityPack.HtmlDocument doc);
-
-        public abstract string GetDescriptionFromUrl(HtmlAgilityPack.HtmlDocument doc);
-        public abstract Location GetLocationFromUrl(HtmlAgilityPack.HtmlDocument doc);
+        public abstract decimal GetAreaFromUrl(HtmlDocument doc);
+        public abstract decimal GetPriceFromUrl(HtmlDocument doc);
+        public abstract string GetDescriptionFromUrl(HtmlDocument doc);
+        public abstract Location GetLocationFromUrl(HtmlDocument doc);
         public abstract int? GetConstuctionYear(HtmlDocument doc);
         public abstract int? GetRoomNumberFromUrl(HtmlDocument doc);
         public abstract int? GetFloor(HtmlDocument doc);
@@ -46,16 +43,11 @@ namespace BusinessLogic.Logic.Web
         public abstract bool GetLift(HtmlDocument doc);
 
 
-        //public List<Flat> GetFlatOffersFromWebsite()
-        //{
-        //      return this.GetFlats(this.TakeOfferLinks());
-        //}
-
         public List<Flat> GetFlats(IReadOnlyList<FlatLink> urlList)
         {
             // declaring & loading dom
-            HtmlWeb web = new HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+           HtmlWeb web = new HtmlWeb();
+           HtmlDocument doc = new HtmlDocument();
 
             List<Flat> flats = new List<Flat>();
 
@@ -67,23 +59,18 @@ namespace BusinessLogic.Logic.Web
                     Area = GetAreaFromUrl(doc)
                 };
                 if (flat.Area < 5 || flat.Area > 500) continue;
-
                 flat.Price = GetPriceFromUrl(doc);
                 if (flat.Price < 10000) continue;
-
                 flat.Location = GetLocationFromUrl(doc);
                 if (flat.Location.E_longitude > 180 || flat.Location.E_longitude < 0 || flat.Location.N_latitude > 90 || flat.Location.N_latitude < 0) continue;
-
                 flat.Market = GetMarket(doc);
                 if (string.IsNullOrEmpty(flat.Market)) continue;
-
                 flat.Floor = GetFloor(doc);
                 if (!flat.Floor.HasValue) continue;
                 flat.FloorInBuilding = GetBuildingFloor(doc);
                 if (!flat.FloorInBuilding.HasValue) continue;
                 flat.RoomNumber = GetRoomNumberFromUrl(doc);
                 if (!flat.RoomNumber.HasValue) continue;
-
                 flat.Description = GetDescriptionFromUrl(doc);
                 flat.ConstructionYear = GetConstuctionYear(doc);
                 flat.State = GetState(doc);
@@ -97,10 +84,9 @@ namespace BusinessLogic.Logic.Web
                 flat.IsTarrace = GetTarrace(doc);
                 flat.Kitchen = GetKitchen(doc);
                 flat.TypeOfBuilding = GetTypeOfBuilding(doc);
-
                 flat.FlatLink = url;
-
                 flat.OfferDateTime = DateTime.Today;
+                flat.IsAccepted = false;
 
                 flats.Add(flat);
 

@@ -6,3 +6,9 @@ mat-form-field {
   background: none;
   border: none;
 }
+
+.coordinates {
+  margin: 10px;
+  width: 100%;
+  text-align: center;
+}

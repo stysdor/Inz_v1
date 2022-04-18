@@ -45,10 +45,11 @@ namespace API.Controllers
         }
 
         [HttpGet("feedModel")]
-        public async Task<ActionResult<Model>> FeedModel(
-            [FromQuery] SpecParams specParams)
+        public async Task<ActionResult<Model>> FeedModel()
         {
-            var flats = getOffersToFeedModel(specParams);
+            var flats = getOffersToFeedModel();
+            if (flats.Count < 1) return NoContent();
+
             var request = new FeedModelRequest(mapper.Map<List<FlatToModelDTO>>(flats));
             var httpContent = getStringContentFromFeedModelRequest(request);
 
@@ -61,12 +62,18 @@ namespace API.Controllers
                 var isUpdated = updateFlatsUsedInModel(flats);
                 return model;
             }
-            else {                      
+            else {
                 return null;
             }
         }
 
-        private IReadOnlyList<Flat> getOffersToFeedModel(SpecParams specParams) {
+        private IReadOnlyList<Flat> getOffersToFeedModel() {
+            var specParams = new SpecParams()
+            {
+                IsAccepted = true,
+                IsUsedInModel = false,
+                PageSize = 10000
+            };
             var spec = new FlatSpecification(specParams);
             return flatRepository.GetFlats(spec);
         }

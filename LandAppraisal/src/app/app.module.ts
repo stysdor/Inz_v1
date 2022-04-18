@@ -16,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthGuard } from './shared/interceptor/auth-guard.service';
 import { LoaderInterceptorService } from './shared/interceptor/loader-interceptor.service';
 import { AgmCoreModule } from '@agm/core';
+import { API_KEY } from './secret';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { AgmCoreModule } from '@agm/core';
     NgbModule,
     FontAwesomeModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCPvNmzyc0Yz4vgMW4aE9KH3K5jpZa_6xI'
+      apiKey: API_KEY
     })
   ],
   providers: [

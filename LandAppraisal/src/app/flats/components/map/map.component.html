@@ -5,6 +5,7 @@
     <input id="autocomplete"
            matInput
            ngx-google-places-autocomplete
+           [options]="options"
            (onAddressChange)="handleAddressChange($event)"
            placeholder="Lokalizacja" />
 
@@ -19,5 +20,7 @@
     </agm-marker>
   </agm-map>
 
-  <div *ngIf="coordinates?.latitude && coordinates?.longitude">Współrzędne: {{coordinates.latitude}}, {{coordinates.longitude}}</div>
+  <div *ngIf="coordinates?.latitude && coordinates?.longitude" class="coordinates">
+    Wybrane współrzędne: <strong>{{coordinates.latitude | number: '1.0-5' }}N, {{coordinates.longitude | number: '1.0-5'}}E</strong>
+  </div>
 </div>

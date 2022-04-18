@@ -29,9 +29,9 @@ namespace BusinessLogic.Specification
                 query = query.OrderByDescending(spec.OrderByDescending);
             }
 
-            if (spec.IsPagingEnabled)
+            if (spec.IsPagingEnabled && spec.Skip.HasValue && spec.Take.HasValue)
             {
-                query = query.Skip(spec.Skip).Take(spec.Take);
+                query = query.Skip((int)spec.Skip).Take((int)spec.Take);
             }
 
             return query;

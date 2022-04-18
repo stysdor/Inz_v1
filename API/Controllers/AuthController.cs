@@ -17,6 +17,20 @@ namespace API.Controllers
             this.repository = repository;
         }
 
+        [HttpPost("login")]
+        public ActionResult ValidateUser([FromBody] UserCredential user)
+        {
+            bool isOk = repository.ValidateUser(user.Email, user.Password);
+            if (isOk)
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return UnprocessableEntity();
+            }
+        }
+
         [HttpGet("getUserNameByEmail")]
         public ActionResult GetUserByEmail(string email)
         {
@@ -29,18 +43,6 @@ namespace API.Controllers
             return Ok(repository.GetUser(userName));
         }
 
-        [HttpPost("login")]
-        public ActionResult ValidateUser([FromBody] UserCredential user)
-        {
-            bool isOk = repository.ValidateUser(user.Email, user.Password);
-            if (isOk)
-            {
-                return Ok(true);
-            }
-            else {
-                return UnprocessableEntity();
-            }
-        }
 
         [HttpPost("register")]
         public ActionResult InsertUser([FromBody] UserDTO user)

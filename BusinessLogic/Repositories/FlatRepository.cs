@@ -12,8 +12,11 @@ namespace BusinessLogic.Repositories
 {
     public class FlatRepository : BaseRepository, IFlatRepository
     {
+        FlatWebSite Website { get; set; }
         public FlatRepository(ISession session) : base(session)
-        {}
+        {
+            Website = new OtoDomWebSite();
+        }
 
         public IReadOnlyList<Flat> GetAllFlats()
         {
@@ -25,19 +28,6 @@ namespace BusinessLogic.Repositories
                     session.Close();
                     return flats;
                 }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        public IReadOnlyList<Flat> GetFlats(ISpecification<Flat> spec)
-        {
-            try
-            {
-                    var flats = ApplySpecification(spec).ToList();
-                    return flats;
             }
             catch (Exception e)
             {
@@ -140,7 +130,8 @@ namespace BusinessLogic.Repositories
         }
     
         public IReadOnlyList<FlatLink> GetFlatsLinksToGetFlatOffers(int count) {
-            
+
+            if (count < 1) return null;
             try
             {
                     List<int> listId = session.Query<Flat>()
@@ -160,10 +151,22 @@ namespace BusinessLogic.Repositories
             }
         }
 
+        public IReadOnlyList<Flat> GetFlats(ISpecification<Flat> spec)
+        {
+            try
+            {
+                var flats = ApplySpecification(spec).ToList();
+                return flats;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public bool DownloadFlatsFromLinks(IReadOnlyList<FlatLink> links)
         {
-            var list = new OtoDomWebSite().GetFlats(links);
-            list.ForEach(item => { item.IsAccepted = false; item.OfferDateTime = DateTime.Now;});
+            var list = Website.GetFlats(links);
             return AddFlats(list);
         }
 
@@ -175,7 +178,7 @@ namespace BusinessLogic.Repositories
 
         private IQueryable<Flat> ApplySpecification(ISpecification<Flat> spec)
         {
-            return SpecificationEvaluator<Flat>.GetQuery(session.Query<Flat>().AsQueryable(), spec); ;
+            return SpecificationEvaluator<Flat>.GetQuery(session.Query<Flat>().AsQueryable(), spec); 
         }
     }
 }

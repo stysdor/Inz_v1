@@ -13,6 +13,7 @@
     <Name>Scripts</Name>
     <RootNamespace>Scripts</RootNamespace>
     <InterpreterId>MSBuild|env2|$(MSBuildProjectFullPath)</InterpreterId>
+    <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,20 +51,16 @@
     <Folder Include="model\" />
     <Folder Include="prediction_api\" />
     <Folder Include="scripts\" />
-    <Folder Include="notebook\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="autoformat.sh">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="data\flats.csv" />
     <Content Include="model\kmeans.pkl" />
     <Content Include="model\model.h5" />
     <Content Include="model\model.json" />
-    <Content Include="model\model.pkl" />
     <Content Include="model\scaler.pkl" />
     <Content Include="requirements.txt" />
-    <Content Include="scripts\config.yml" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env2\">

@@ -32,7 +32,7 @@ export class FlatService {
   getPricePrediction(flat: FlatToPrediction): Observable<number> {
     return this.http.post<number>(`${this.predictionUrl}predict`, flat).pipe(
       tap((price: number) => this.router.navigateByUrl('/flats/prediction', {
-        state: { price: price }
+        state: { price: price, flat: flat }
       }))
     );
   }
@@ -41,8 +41,8 @@ export class FlatService {
     return this.http.get<ModelData[]>(`${this.baseUrl}model/`)
   }
 
-  feedModel(flatParams: FlatParams): Observable<ModelData> {
-    return this.http.get<ModelData>(`${this.baseUrl}model/feedModel`, { params: flatParams } as Params)
+  feedModel(): Observable<ModelData> {
+    return this.http.get<ModelData>(`${this.baseUrl}model/feedModel`);
   }
 
   saveFlats(flats: Flat[]): Observable<boolean> {

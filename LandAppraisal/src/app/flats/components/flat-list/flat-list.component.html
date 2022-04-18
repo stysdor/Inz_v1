@@ -1,18 +1,3 @@
-<!--<div class="flat-list-container">
-  <ng-container *ngIf="!flats">
-    <p>Nie ma żadnych ofert mieszkań do pokazania.</p>
-  </ng-container>
-
-  <div *ngIf="flats" class="flat-list">
-    <div *ngFor="let flat of flats" class="flat-list-item">
-      <app-flat-list-item [flat]="flat"
-                          [checkedList]="checkedList">
-
-      </app-flat-list-item>
-    </div>
-  </div>
-</div>-->
-
 <table mat-table [dataSource]="flats" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.

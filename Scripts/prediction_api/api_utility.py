@@ -11,9 +11,6 @@ import numpy as np
 
 
 class Predictor:
-    """
-    Preictor class that host the model and metadata
-    """
 
     def __init__(self):
         """

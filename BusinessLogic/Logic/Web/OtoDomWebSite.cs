@@ -15,7 +15,6 @@ namespace BusinessLogic.Logic.Web
         public override string OfferCount_xPath { get; set; } = "//span[contains(text(), 'Ogłoszenia:')]/following-sibling::span";
         public override string Url_xPath { get; set; } = "//a[@data-cy='listing-item-link']";
         public override string Area_xPath { get; set; } = "//div[contains(text(), 'Powierzchnia')]/parent::div/following-sibling::div/div";
-        public string RoomNumber_xPath { get; set; } = "//div[contains(text(), 'Liczba pokoi')]/following-sibling::div";
         public override string Price_xPath { get; set; } = "//strong[@data-cy='adPageHeaderPrice']";
         public override string Description_xPath { get; set; } = "//div[@data-cy='adPageAdDescription']";
         public override string OfferDate_xPath { get; set; }

@@ -11,30 +11,29 @@ namespace BusinessLogic.Specification
             ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1),
                 productParams.PageSize);
 
-            if (!string.IsNullOrEmpty(productParams.Sort))
+
+            switch (productParams.Sort)
             {
-                switch (productParams.Sort)
-                {
-                    case "priceAsc":
-                        AddOrderBy(p => p.Price);
-                        break;
-                    case "priceDesc":
-                        AddOrderByDescending(p => p.Price);
-                        break;
-                    case "areaAsc":
-                        AddOrderBy(p => p.Area);
-                        break;
-                    case "areaDesc":
-                        AddOrderByDescending(p => p.Area);
-                        break;
-                    case "offerData":
-                        AddOrderByDescending(p => p.OfferDateTime);
-                        break;
-                   default:
-                        AddOrderBy(p => p.Price);
-                        break;
-                }
+                case "priceAsc":
+                    AddOrderBy(p => p.Price);
+                    break;
+                case "priceDesc":
+                    AddOrderByDescending(p => p.Price);
+                    break;
+                case "areaAsc":
+                    AddOrderBy(p => p.Area);
+                    break;
+                case "areaDesc":
+                    AddOrderByDescending(p => p.Area);
+                    break;
+                case "offerData":
+                    AddOrderByDescending(p => p.OfferDateTime);
+                    break;
+                default:
+                    AddOrderByDescending(p => p.OfferDateTime);
+                    break;
             }
+            
 
             if (productParams.IsAccepted.HasValue && productParams.IsUsedInModel.HasValue)
             {
