@@ -14,7 +14,7 @@ namespace BusinessLogic.Logic.Web
         public override string Url { get; set; } = "https://www.otodom.pl/pl/oferty/sprzedaz/mieszkanie/rzeszow";
         public override string OfferCount_xPath { get; set; } = "//span[contains(text(), 'Ogłoszenia:')]/following-sibling::span";
         public override string Url_xPath { get; set; } = "//a[@data-cy='listing-item-link']";
-        public override string Area_xPath { get; set; } = "//div[contains(text(), 'Powierzchnia')]/following-sibling::div";
+        public override string Area_xPath { get; set; } = "//div[contains(text(), 'Powierzchnia')]/parent::div/following-sibling::div/div";
         public string RoomNumber_xPath { get; set; } = "//div[contains(text(), 'Liczba pokoi')]/following-sibling::div";
         public override string Price_xPath { get; set; } = "//strong[@data-cy='adPageHeaderPrice']";
         public override string Description_xPath { get; set; } = "//div[@data-cy='adPageAdDescription']";
@@ -64,7 +64,10 @@ namespace BusinessLogic.Logic.Web
 
         public override int? GetFloor(HtmlDocument doc)
         {
-            string value = GetString("Piętro", doc);
+            string floorString = GetString("Piętro", doc);
+            string[] values = floorString.Split('/');
+            string value = values[0];
+
             if (value is null || value.Length == 0)
             {
                 return null;
@@ -83,7 +86,10 @@ namespace BusinessLogic.Logic.Web
 
         public override int? GetBuildingFloor(HtmlDocument doc)
         {
-            string value = GetString("Liczba pięter", doc);
+            string floorString = GetString("Piętro", doc);
+            string[] values = floorString.Split('/');
+            if (values.Length < 2) return null;
+            string value = values[1];
             value = Regex.Replace(value, @"[^\d]", "");
             if (value is null || value.Length == 0) return null;
             return Convert.ToInt32(value);
@@ -167,7 +173,7 @@ namespace BusinessLogic.Logic.Web
        
         private int? GetNumber(string contains, HtmlDocument doc)
         {
-            string xPath = "//div[contains(text(), '" + contains +"')]/following-sibling::div";
+            string xPath = "//div[contains(text(), '" + contains +"')]/parent::div/following-sibling::div/div";
             int number = 0;
             if (doc.DocumentNode.SelectNodes(xPath) != null)
             {
@@ -183,7 +189,7 @@ namespace BusinessLogic.Logic.Web
 
         private string GetString(string contains, HtmlDocument doc)
         { 
-            string xPath = "//div[contains(text(), '" + contains + "')]/following-sibling::div";
+            string xPath = "//div[contains(text(), '" + contains + "')]/parent::div/following-sibling::div/div";
             string value = "";
             if (doc.DocumentNode.SelectNodes(xPath) != null)
             {

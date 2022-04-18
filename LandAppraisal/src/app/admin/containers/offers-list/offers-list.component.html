@@ -3,7 +3,8 @@
     <h1 class="list-title">Baza ofert mieszkaniowych</h1>
   </header>
   <main>
-    <ng-container *ngIf="flats">
+    <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+    <ng-container *ngIf="flats.length > 0">
       <mat-paginator [length]="totalCount"
                      [pageSize]="flatParams.pageSize"
                      [pageSizeOptions]="[6, 12, 24]"

@@ -7,6 +7,6 @@ import { LoaderService } from './shared/interceptor/loader.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'LandAppraisal';
+  title = 'FlatAppraisal';
 
 }

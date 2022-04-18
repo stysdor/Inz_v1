@@ -1,9 +1,8 @@
 ﻿using API.Helpers;
-using API.ModelDTO;
+using API.DTO;
 using AutoMapper;
 using BusinessLogic.BaseSpecification;
 using BusinessLogic.Interfaces;
-using BusinessLogic.Logic.SI;
 using BusinessLogic.Specification;
 using Core.Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +26,7 @@ namespace API.Controllers
         public ActionResult<Pagination<FlatDTO>> GetFlats(
             [FromQuery] SpecParams specParams)
         {
-            var spec = new FlatSpecification (specParams);
+            var spec = new FlatSpecification(specParams);
             var countSpec = new FlatForCountingSpecification(specParams);
             var totalCount = flatRepository.Count(countSpec);
             var flats = flatRepository.GetFlats(spec);
@@ -56,14 +55,5 @@ namespace API.Controllers
             return Ok(flatRepository.AddFlats(data));
         }
 
-        [HttpPost("postFlat")]
-        public ActionResult<decimal> PostFlat(
-          [FromBody] FlatDTO flat)
-        {
-            var reader = new ScriptReader();
-            var response =  reader.run_cmd();
-            var data = mapper.Map<FlatDTO, Flat>(flat);
-            return Ok(250300);
-        }
     }
 }

@@ -36,8 +36,8 @@ namespace API
                 var factory = provider.GetService<ISessionFactory>();
                 return factory.OpenSession();
             });
-            services.AddScoped<ILandOfferRepository, LandOfferRepository>();
             services.AddScoped<IFlatRepository, FlatRepository>();
+            services.AddScoped<IModelRepository, ModelRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddSwaggerGen(c =>

@@ -3,24 +3,23 @@
     <h1 class="list-title">Nowe ogłoszenia</h1>
   </header>
   <main>
-    <div *ngIf="loader.isLoading | async" class="loader-contaner">
-      <mat-spinner mode="determinate" color="blue">
-      </mat-spinner>
-    </div>
-    <ng-container *ngIf="flats.length > 0; else noResult">
-      <div class="new-offer-list-header">
-        <button mat-raised-button class="download-button" (click)="onAllSelected()">Zaznacz wszystkie</button>
-        <mat-paginator [length]="totalCount"
-                       [pageSize]="flatParams.pageSize"
-                       [pageSizeOptions]="[6, 12, 24]"
-                       [hidePageSize]="true"
-                       showFirstLastButtons="true"
-                       (page)="onPageChanged($event)"
-                       aria-label="Select page">
-        </mat-paginator>
-        <button mat-raised-button color="accent" class="download-button" (click)="save()">Zapisz</button>
-      </div>
+    <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+    <ng-container *ngIf="!(loading$ | async)">
+      <ng-container *ngIf="flats.length > 0; else noResult">
+        <div class="new-offer-list-header">
+          <button mat-raised-button class="download-button" (click)="onAllSelected()">Zaznacz wszystkie</button>
+          <mat-paginator [length]="totalCount"
+                         [pageSize]="flatParams.pageSize"
+                         [pageSizeOptions]="[6, 12, 24]"
+                         [hidePageSize]="true"
+                         showFirstLastButtons="true"
+                         (page)="onPageChanged($event)"
+                         aria-label="Select page">
+          </mat-paginator>
+          <button mat-raised-button color="accent" class="download-button" (click)="save()">Zapisz</button>
+        </div>
         <app-flat-list [flats]="flats" [checkedList]="true"></app-flat-list>
+      </ng-container>
     </ng-container>
     <ng-template #noResult>
       <p>Nie ma żadnych ofert mieszkań do pokazania.</p>

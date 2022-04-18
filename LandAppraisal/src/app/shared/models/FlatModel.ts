@@ -9,7 +9,7 @@ export type Flat = {
   floor: number;
   floorInBuilding: number;
   constructionYear: number;
-  typeOfBuilding: number;
+  typeOfBuilding: string;
   isBalcony: boolean;
   isGarden: boolean;
   isTarrace: boolean;
@@ -17,11 +17,11 @@ export type Flat = {
   isCellar: boolean;
   isGarage: boolean;
   isParkingSpace: boolean;
-  kitchen: string;
   state: string;
   market: string;
   isLift: boolean;
   isAccepted: boolean;
+  isUsedInModel: boolean;
 }
 
 export class FlatParams {
@@ -29,5 +29,25 @@ export class FlatParams {
   pageIndex: number = 1;
   pageSize: number = 24;
   isAccepted?: boolean;
+  isUsedInModel?: boolean;
+}
+
+export type FlatToPrediction = {
+  area: number;
+  n_latitude: number;
+  e_longitude: number;
+  roomNumber: number;
+  floor: number;
+  floorInBuilding: number;
+  isBalcony: boolean;
+  isGarden: boolean;
+  isTarrace: boolean;
+  isLoggia: boolean;
+  constructionYear: number;
+  isCellar: boolean;
+  isGarage: boolean;
+  isParkingSpace: boolean;
+  market: string;
+  isLift: boolean;
 }
 

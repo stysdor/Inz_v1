@@ -22,7 +22,7 @@ export class AuthService {
   login(email: string, password: string): Observable<User> {
     return this.http.post<LoginResponse>(this.baseUrl + 'auth/login', { email, password }, { withCredentials: true })
       .pipe(
-       // tap((response: LoginResponse) => this.setCurrentUser(response)),
+        tap((response: LoginResponse) => this.setCurrentUser(response)),
         map((response: LoginResponse) => response.user),
         catchError(error => {
           return throwError(error);
@@ -34,7 +34,7 @@ export class AuthService {
   register(values: User): Observable<User> {
     return this.http.post<LoginResponse>(this.baseUrl + 'auth/register', values)
       .pipe(
-      //  tap((response: LoginResponse) => this.setCurrentUser(response)),
+        tap((response: LoginResponse) => this.setCurrentUser(response)),
         map((response: LoginResponse) => response.user),
         catchError(error => {
           return throwError(error);
@@ -44,8 +44,7 @@ export class AuthService {
   }
 
   logout(): void {
-    //this.http.post(this.baseUrl + '/account/revoke-token', {}, { withCredentials: true }).subscribe();
-    //this.removeSession();
+    this.removeSession();
   }
 
   loadCurrentUser(): Observable<User> {
@@ -58,24 +57,24 @@ export class AuthService {
     return of(false);
   }
 
-  //getToken(key: string): string | null {
-  //  return localStorage.getItem(key);
-  //}
+  getToken(key: string): string | null {
+    return localStorage.getItem(key);
+  }
 
   redirectToForbiddenPage(): void {
     this.router.navigateByUrl(this.baseUrl + 'account/forbidden');
   }
 
-  //private setCurrentUser(response: LoginResponse): void {
-  //  if (!response.user) return;
-  //  this.setToken('token', response.token);
-  //}
+  private setCurrentUser(response: LoginResponse): void {
+    if (!response.user) return;
+    this.setToken('token', response.user.userName);
+  }
 
-  //private setToken(key: string, token: string): void {
-  //  localStorage.setItem(key, token);
-  //}
+  private setToken(key: string, token: string): void {
+    localStorage.setItem(key, token);
+  }
 
-  //private removeSession(): void {
-  //  localStorage.removeItem('token');
-  //}
+  private removeSession(): void {
+    localStorage.removeItem('token');
+  }
 }

@@ -31,6 +31,7 @@ namespace Core.Domain
         public virtual string Market { get; set; }
         public virtual bool IsLift { get; set; }
         public virtual bool IsAccepted { get; set; }
+        public virtual bool IsUsedInModel { get; set; }
         public virtual FlatLink FlatLink { get; set; }
 
     }

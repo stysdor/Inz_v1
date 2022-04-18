@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthGuard } from './shared/interceptor/auth-guard.service';
 import { LoaderInterceptorService } from './shared/interceptor/loader-interceptor.service';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,10 @@ import { LoaderInterceptorService } from './shared/interceptor/loader-intercepto
       name: 'Flat Appraisal App',
     }),
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCPvNmzyc0Yz4vgMW4aE9KH3K5jpZa_6xI'
+    })
   ],
   providers: [
     AuthGuard,

@@ -2,7 +2,7 @@
 {
     public class SpecParams
     {
-        private const int MaxPageSize = 50;
+        private const int MaxPageSize = 10000;
         public int PageIndex { get; set; } = 1;
 
         private int _pageSize = 24;
@@ -13,5 +13,6 @@
         }
         public string Sort { get; set; }
         public bool? IsAccepted { get; set; }
+        public bool? IsUsedInModel { get; set; }
     }
 }

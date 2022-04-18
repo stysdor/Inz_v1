@@ -59,6 +59,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: CustomPaginator }],
 })

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl:  'https://localhost:5001/api/'
+  apiUrl:  'https://localhost:5001/api/',
+  apiPredictionUrl:  'http://127.0.0.1:8000/'
 };
 
 /*

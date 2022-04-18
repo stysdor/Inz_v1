@@ -3,9 +3,38 @@
     <h1>Dane modelu</h1>
   </header>
   <main>
-    <div><p>Liczba ofert w bazie: {{totalCount}}</p></div>
-    <div><p>Accuracy: {{data[0].accuracy}} %</p></div>
-    <div><p>Mean squere error: {{data[0].meanSquareError}} </p></div>
+    <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+    <ng-container *ngIf="model">
+      <div class="model">
+        <span>Liczba ofert wykorzystana w modelu:</span>
+        <span class="model-value"> {{model.offerCount}}</span>
+      </div>
+      <div class="model">
+        <div>
+          <div><strong>MSE </strong><i> (ang. mean squere error)</i></div>
+          <div>Średni błąd absolutny</div>
+        </div>
+        <span class="model-value"> {{model.mseTest}}</span>
+      </div>
+      <div class="model">
+        <div>
+          <div><strong>RMSE </strong><i> (ang. root mean squere error)</i></div>
+          <div>Pierwiastek błędu średniokwadratowego</div>
+        </div>
+        <span class="model-value"> {{model?.rmseTest}} </span>
+      </div>
+      <div class="model">
+        <div>
+          <div><strong>MAE</strong><i> (ang. mean absolute error)</i></div>
+          <div>Błąd średniokwadratowy</div>
+        </div>
+        <span class="model-value"> {{model?.maeTest}} </span>
+      </div>
+      <div class="model-button">
+        <button mat-button (click)="onClick()" mat-raised-button mat-accent>Trenuj model nowymi danymi</button>
+        <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+      </div>
+    </ng-container>
   </main>
 </div>
 

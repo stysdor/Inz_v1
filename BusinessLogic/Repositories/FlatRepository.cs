@@ -36,12 +36,8 @@ namespace BusinessLogic.Repositories
         {
             try
             {
-                using (session)
-                {
                     var flats = ApplySpecification(spec).ToList();
-                    session.Close();
                     return flats;
-                }
             }
             catch (Exception e)
             {
@@ -153,6 +149,7 @@ namespace BusinessLogic.Repositories
                         .ToList();
                     var links = session.Query<FlatLink>()
                         .Where(x => !listId.Contains(x.Id))
+                        .OrderByDescending(x => x.UrlDate)
                         .Take(count)
                         .ToList();
                     return links;

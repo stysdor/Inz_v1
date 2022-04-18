@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="Core.Domain" assembly="Core" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Model" table="Model">
+    <id name="Id" column="Id" type="Int32">
+      <generator class="native" />
+    </id>
+    <property name="Date" column="date"  />
+    <property name="MseTest" column="mse_test"  />
+    <property name="MseTrain" column="mse_train"  />
+    <property name="RmseTrain" column="rmse_train"  />
+    <property name="RmseTest" column="rmse_test"  />
+    <property name="MaeTest" column="mae_test"  />
+    <property name="MaeTrain" column="mae_train"  />
+    <property name="OfferCount" /> 
+  </class>
+</hibernate-mapping>

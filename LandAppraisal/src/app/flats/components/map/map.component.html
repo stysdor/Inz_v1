@@ -1,0 +1,23 @@
+<div class="container">
+  <p>Wyszukaj lokalizację lub wybierz na mapie.</p>
+  <mat-form-field appearance="fill" class="form-control">
+    <mat-label>Lokalizacja</mat-label>
+    <input id="autocomplete"
+           matInput
+           ngx-google-places-autocomplete
+           (onAddressChange)="handleAddressChange($event)"
+           placeholder="Lokalizacja" />
+
+  </mat-form-field>
+  <agm-map [zoom]="zoom"
+           [latitude]="latitude"
+           [longitude]="longitude"
+           (mapReady)="mapReadyHandler($event)">
+    <agm-marker *ngIf="coordinates?.latitude && coordinates?.longitude"
+                [latitude]="coordinates.latitude"
+                [longitude]="coordinates.longitude">
+    </agm-marker>
+  </agm-map>
+
+  <div *ngIf="coordinates?.latitude && coordinates?.longitude">Współrzędne: {{coordinates.latitude}}, {{coordinates.longitude}}</div>
+</div>

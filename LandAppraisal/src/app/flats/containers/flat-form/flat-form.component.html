@@ -4,11 +4,7 @@
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Lokalizacja</ng-template>
-          <mat-form-field appearance="fill" class="form-control">
-            <mat-label>Lokalizacja</mat-label>
-            <input matInput placeholder="Lokalizacja" formControlName="location" required>
-            <mat-error *ngIf="firstFormGroup.controls.location.hasError('required')">Lokalizacja jest wymagana.</mat-error>
-          </mat-form-field>
+          <app-map (coordinatesEmmiter)="onLocalizationChosen($event)"></app-map>
           <div class="step-buttons">
             <button mat-button matStepperNext>Dalej</button>
           </div>
@@ -40,6 +36,11 @@
             <mat-form-field appearance="fill" class="form-control">
               <mat-label>Liczba pięter w budynku</mat-label>
               <input type="number" step="1" min="0" max="100" matInput placeholder="Piętro" formControlName="floorInBuilding">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="form-control">
+              <mat-label>Rok budowy</mat-label>
+              <input type="number" step="1" min="1000" max="3000" matInput placeholder="Rok budowy" formControlName="constructionYear">
             </mat-form-field>
           </div>
 
@@ -90,7 +91,8 @@
                 mat-raised-button
                 color="accent"
                 type="submit"
-                class="button ">
+                class="button"
+                (click)="onSubmit()">
           Wyceń
         </button>
         <div class="step-buttons">

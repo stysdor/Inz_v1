@@ -14,6 +14,14 @@ width: 100%;
 margin-top: 10px;
 }
 
+mat-progress-spinner {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
 mat-stepper {
   background: rgba(255, 255, 255, 0.4);
 }

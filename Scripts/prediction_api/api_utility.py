@@ -25,14 +25,19 @@ class Predictor:
         
     def predict(self, sample):
         data = transform_item(self, sample)
-        res = self.model.predict([data])
-        res = self.scaler.inverse_transform(res)
+        data = np.delete(data, 1, axis = 1)
+        prediction_scaled = self.model.predict([data])
+        data = np.insert(data, 1, prediction_scaled)
+        data_inverse_transformed = self.scaler.inverse_transform([data])
 
-        return res[0]
+        return data_inverse_transformed[:,1]
 
     def update(self, samples):
         data = transform_data(self, samples)
         return train_model(self.model, self.scaler, data)
+
+    def save_model(self, model):
+        save_model(model)
         
             
 
@@ -60,25 +65,18 @@ def load_kmeans():
 
 def transform_data(predictor: Predictor, samples):
     transformed_data = []
-    transformed_item = []
     for item in samples:
         transformed_item = transform_item(predictor, item)
-        transformed_data.append(transformed_item)
+        transformed_data.append(transformed_item[0])
     return transformed_data
 
 def transform_item(predictor: Predictor, sample):
     X = get_list_attribute(sample)
-    X.append(predictor.kmeans.predict([X[1:3]])[0])
+    X.append(predictor.kmeans.predict([X[2:4]])[0])
+    X.pop(3)
     X.pop(2)
-    X.pop(1)
     transformed_item = []
-    if len(X) > 15:
-        y = X.pop(15)
-        y = np.array([y]).reshape(-1,1)
-        transformed_item = predictor.scaler.transform([X])
-        transformed_item = np.append(transformed_item, predictor.scaler.transform(y))
-    else:
-        transformed_item = predictor.scaler.transform([X])
+    transformed_item = predictor.scaler.transform([X])
 
     return transformed_item
 
@@ -94,10 +92,9 @@ def get_list_attribute(sample):
     return attributes_list
 
 def train_model(model, scaler, data):
-    X =  np.delete(data, 14, axis=1)
-    y = np.delete(data, slice(14), axis=1)
-    y = np.delete(y, 1, axis=1)
-    #y = y.values.reshape(-1,1)
+    data = np.asarray(data)
+    X =  np.delete(data, 1, axis=1)
+    y = data[:,1]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.15)
     model.compile(
         optimizer = 'adam', 
@@ -111,19 +108,18 @@ def train_model(model, scaler, data):
 
     X_testing = np.array(X_test)
     y_predict = model.predict(X_testing)
-    y_predict = scaler.inverse_transform(y_predict)
     mse_training = epochs_hist.history['val_loss'][49]
     rmse_training = epochs_hist.history['val_root_mean_squared_error'][49]
     mae_training = epochs_hist.history['val_mean_absolute_error'][49]
-    mse_test = model.evaluate(X_test, y_test)
+    evaluation_test = model.evaluate(X_test, y_test)
+    save_model(model)
     return {
-        "model": model,
-        "mse_test": mse_test[1],
-        "rmse_test": mse_test[2],
-        "mae_test": mse_test[3],
-        "mse_training": mse_training,
-        "rmse_training": rmse_training,
-        "mae_training": mae_training
+        "mse_test": evaluation_test[1],
+        "rmse_test": evaluation_test[2],
+        "mae_test": evaluation_test[3],
+        "mse_train": mse_training,
+        "rmse_train": rmse_training,
+        "mae_train": mae_training
         }
 
 def save_model(model):

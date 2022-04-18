@@ -16,11 +16,18 @@ import { MatCardModule } from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MapComponent } from './components/map/map.component';
+import { AgmCoreModule } from '@agm/core';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { PredictionComponent } from './containers/prediction/prediction.component';
 
 const routes: Routes = [
   {
     path: 'form', component: FlatFormComponent
   },
+  {
+    path: 'prediction', component: PredictionComponent
+  }
 ];
 
 @NgModule({
@@ -28,6 +35,8 @@ const routes: Routes = [
     FlatListItemComponent,
     FlatListComponent,
     FlatFormComponent,
+    MapComponent,
+    PredictionComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +52,12 @@ const routes: Routes = [
     MatCardModule,
     FontAwesomeModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCPvNmzyc0Yz4vgMW4aE9KH3K5jpZa_6xI',
+      libraries: ['places']
+    }),
+    GooglePlaceModule
 
   ],
   exports: [

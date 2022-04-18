@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { FlatService } from '../../../flats/services/flat.service';
-import { ModelData, ModelDataResponse } from '../../../shared/models/ModelResponse';
+import { LoaderService } from '../../../shared/interceptor/loader.service';
+import { FlatParams } from '../../../shared/models/FlatModel';
+import { ModelData } from '../../../shared/models/ModelResponse';
 
 @Component({
   selector: 'app-model',
@@ -9,17 +12,29 @@ import { ModelData, ModelDataResponse } from '../../../shared/models/ModelRespon
   styleUrls: ['./model.component.css']
 })
 export class ModelComponent implements OnInit {
-  totalCount: number = 0;
+  flatParams = new FlatParams();
   data: ModelData[] = [];
+  model: ModelData | null = null;
+  loading$?: Observable<boolean>;
 
-  constructor(private flatService: FlatService) { }
+  constructor(private flatService: FlatService, public loader: LoaderService) { }
 
   ngOnInit(): void {
+    this.loading$ = this.loader.isLoading;
     this.flatService.getModelData().pipe(
-      tap((response: ModelDataResponse) => {
-        this.totalCount = response.totalCount;
-        this.data = response.data;
+      map(response => {
+        this.data = response;
+        this.model = response[0];
       })
+    ).subscribe();
+  }
+
+  onClick() {
+    this.flatParams.isUsedInModel = false;
+    this.flatParams.isAccepted = true;
+    this.flatParams.pageSize = 10000;
+    this.flatService.feedModel(this.flatParams).pipe(
+      tap(response => this.model = response)
     ).subscribe();
   }
 

@@ -23,6 +23,7 @@
     <property name="IsParkingSpace" type="Boolean" />
     <property name="IsLift" type="Boolean" />
     <property name="IsAccepted" type="Boolean" />
+    <property name="IsUsedInModel" type="Boolean" />
     <property name="Kitchen"  />
     <property name="State"  />
     <property name="Market"  />

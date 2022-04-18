@@ -4,6 +4,7 @@ from typing import Optional, List
 
 import numpy as np
 from fastapi import FastAPI, Query
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from api_utility import Predictor
@@ -11,8 +12,9 @@ from api_utility import Predictor
 ##################
 # Define input data model
 ##################
-class Sample(BaseModel):
+class Flat(BaseModel):
     area: float 
+    price: Optional[float] = 0
     n_latitude: float 
     e_longitude: float 
     roomNumber: int
@@ -29,24 +31,6 @@ class Sample(BaseModel):
     market: str
     isLift: bool
 
-class Flat(BaseModel):
-    area: float 
-    n_latitude: float 
-    e_longitude: float 
-    roomNumber: int
-    floor: int 
-    floorInBuilding: int
-    isBalcony: bool 
-    isGarden: bool
-    isTarrace: bool
-    isLoggia: bool
-    constructionYear: int
-    isCellar: bool
-    isGarage: bool
-    isParkingSpace: bool
-    market: str
-    isLift: bool
-    price: float
 
 class Flats(BaseModel):
     samples: List[Flat]
@@ -61,6 +45,23 @@ predictor = Predictor()
 ##################
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:4200",
+    "http://localhost:5000",
+    "https://localhost:5000",
+    "http://localhost:5001",
+    "https://localhost:5001"  
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.get("/")
 def read_root():
     """
@@ -73,7 +74,7 @@ def read_root():
 
 
 @app.post("/predict/")
-def predict_item(sample: Sample):
+def predict_item(sample: Flat):
     return {
         "prediction": float(predictor.predict(sample))
     }
@@ -83,11 +84,10 @@ def predict_item(sample: Sample):
 def update_model(flats: Flats):
     res = predictor.update(flats.samples)
     return {
-        "mse_training": res["mse_training"],
-        "mse_test": res["mse_test"],
-        "rmse_training": res["mse_training"],
-        "rmse_test": res["mse_test"],
-        "mae_training": res["mse_training"],
-        "mae_test": res["mse_test"],
-        "utc_ts": int(time.time()),
+        "MseTrain": res["mse_train"],
+        "MseTest": res["mse_test"],
+        "RmseTrain": res["rmse_train"],
+        "RmseTest": res["rmse_test"],
+        "MaeTrain": res["mae_train"],
+        "MaeTest": res["mae_test"],
     }

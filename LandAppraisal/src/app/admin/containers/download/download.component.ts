@@ -7,6 +7,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { FlatService } from '../../../flats/services/flat.service';
+import { LoaderService } from '../../../shared/interceptor/loader.service';
 
 @Component({
   selector: 'app-download',
@@ -18,19 +19,21 @@ export class DownloadComponent {
   linkCount$?: Observable<number>;
   countForm: FormGroup;
   isDownload$?: Observable<boolean>;
+  loading$?: Observable<boolean>;
 
   stepperOrientation$: Observable<StepperOrientation>;
 
 
-  constructor(private flatService: FlatService, private fb: FormBuilder, breakpointObserver: BreakpointObserver) {
+  constructor(private flatService: FlatService, private fb: FormBuilder, breakpointObserver: BreakpointObserver, public loader: LoaderService) {
     this.stepperOrientation$ = breakpointObserver
       .observe('(min-width: 992px)')
       .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
 
     this.countForm = this.fb.group({
       count: new FormControl('')
-    }
-    );
+    });
+
+    this.loading$ = this.loader.isLoading;
   }
 
   downloadLinks(): void {

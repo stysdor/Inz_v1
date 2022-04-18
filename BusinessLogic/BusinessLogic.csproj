@@ -100,21 +100,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IModelRepository.cs" />
     <Compile Include="Interfaces\IFlatRepository.cs" />
-    <Compile Include="Interfaces\ILandOfferRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Logic\SI\ScriptReader.cs" />
     <Compile Include="Logic\Web\FlatWebSite.cs" />
     <Compile Include="Logic\Web\OtoDomWebSite.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\ModelRepository.cs" />
     <Compile Include="Repositories\FlatRepository.cs" />
-    <Compile Include="Repositories\LandOfferRepository.cs" />
     <Compile Include="Logic\Interface\IOfferDownloader.cs" />
-    <Compile Include="Logic\Web\GratkaWebSite.cs" />
-    <Compile Include="Logic\Web\WebSite.cs" />
     <Compile Include="NHibernate\NHibernateBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\LandRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Specification\BaseSpecification.cs" />
     <Compile Include="Specification\FlatForCountingSpecification.cs" />

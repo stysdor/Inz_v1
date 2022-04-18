@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { FlatService } from '../../../flats/services/flat.service';
+import { LoaderService } from '../../../shared/interceptor/loader.service';
 import { Flat, FlatParams } from '../../../shared/models/FlatModel';
 
 @Component({
@@ -11,9 +12,10 @@ import { Flat, FlatParams } from '../../../shared/models/FlatModel';
   styleUrls: ['./offers-list.component.css']
 })
 export class OffersListComponent implements OnInit {
-  flats: Flat[] = [];
+  flats: Flat[] =[];
   flatParams = new FlatParams();
   totalCount: number = 0;
+  loading$?: Observable<boolean>;
 
   sortOptions = [
     { name: 'Price: Low to High', value: 'priceAsc' },
@@ -22,9 +24,10 @@ export class OffersListComponent implements OnInit {
     { name: 'Area: High to Low', value: 'areaDesc' }
   ];
 
-  constructor(private flatService: FlatService) { }
+  constructor(private flatService: FlatService, public loader: LoaderService) { }
 
   ngOnInit(): void {
+    this.loading$ = this.loader.isLoading;
     this.getFlats();
   }
 
