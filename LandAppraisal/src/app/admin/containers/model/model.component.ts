@@ -16,6 +16,7 @@ export class ModelComponent implements OnInit {
   data: ModelData[] = [];
   model: ModelData | null = null;
   loading$?: Observable<boolean>;
+  isTrained: boolean = false;
 
   constructor(private flatService: FlatService, public loader: LoaderService) { }
 
@@ -24,14 +25,14 @@ export class ModelComponent implements OnInit {
     this.flatService.getModelData().pipe(
       map(response => {
         this.data = response;
-        this.model = response[0];
+        this.model = response[response.length - 1];
       })
     ).subscribe();
   }
 
   onClick() {
     this.flatService.feedModel().pipe(
-      tap(response => this.model = response)
+      tap(response => { this.model = response; this.isTrained = true; })
     ).subscribe();
   }
 

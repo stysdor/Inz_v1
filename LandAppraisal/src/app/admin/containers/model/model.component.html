@@ -33,6 +33,7 @@
       <div class="model-button">
         <button mat-button (click)="onClick()" mat-raised-button mat-accent>Trenuj model nowymi danymi</button>
         <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+        <p *ngIf="isTrained">Model został wytrenowany.</p>
       </div>
     </ng-container>
   </main>

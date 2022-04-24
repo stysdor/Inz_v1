@@ -17,9 +17,6 @@
       <mat-error *ngIf="signinForm.controls.password.hasError('required')">Hasło jest wymagane.</mat-error>
     </mat-form-field>
 
-    <div  class="error">
-      <mat-error *ngIf="error">{{error}}</mat-error>
-    </div>
     <div class="error">
       <mat-error>{{errorAPI$ | async}}</mat-error>
     </div>
@@ -32,7 +29,6 @@
       Zaloguj
     </button>
   </form>
-  <p class="text-under-form">Nie masz konta? <a routerLink="/account/register">Utwórz konto</a></p>
 </div>
 
 

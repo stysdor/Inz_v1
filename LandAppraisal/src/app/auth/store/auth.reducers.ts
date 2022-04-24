@@ -32,7 +32,7 @@ export const reducer = createReducer(
 
   on(AuthActions.loginFailure, state => ({
     ...state,
-    errorMessage: 'Incorrect email and/or password'
+    errorMessage: 'Nieprawidłowy email lub hasło'
   })),
 
   on(AuthActions.logoutSuccess, state => ({

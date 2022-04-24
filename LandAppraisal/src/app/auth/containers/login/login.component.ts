@@ -46,7 +46,6 @@ export class LoginComponent {
 
   private checkSigninForm(): boolean {
     if (this.signinForm?.invalid) {
-      this.error = "Nieprawidłowe dane formularza.";
       return false;
     }
     return true;

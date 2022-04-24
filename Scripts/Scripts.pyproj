@@ -60,6 +60,7 @@
     <Content Include="model\model.h5" />
     <Content Include="model\model.json" />
     <Content Include="model\scaler.pkl" />
+    <Content Include="readme.txt" />
     <Content Include="requirements.txt" />
   </ItemGroup>
   <ItemGroup>
